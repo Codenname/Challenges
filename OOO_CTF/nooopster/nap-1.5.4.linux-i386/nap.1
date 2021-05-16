@@ -1,0 +1,595 @@
+.TH "nap" "1" "1.5.4" "Peter Selinger" "Napter client"
+.SH "NAME"
+nap, napping - Linux Napster Client
+.SH "SYNTAX"
+nap <\fIoptions\fP>
+.br 
+napping
+.SH "DESCRIPTION"
+.LP 
+Nap is a linux console napster client written by Kevin Sullivan and
+improved by Peter Selinger and others. The advantage of nap over other
+graphical clients like gnome-napster is that you can run it under
+screen(1) on a remote host and disconnect from your session while nap
+continues the downloads. You can later reconnect to your running
+client even from another host and do more commands.
+.LP 
+Napping is a helper application required by nap to send and reveive
+ping packets. For napping to work it should be installed suid root.
+.LP 
+For more information, please see the HTML documentation at
+http://nap.sourceforge.net/userguide.html.
+.SH "OPTIONS"
+.LP 
+.TP 
+\fB\-h, \-\-help\fR
+Output help information and exit
+.TP 
+\fB\-v, \-\-version\fR
+print version info and exit
+.TP 
+\fB\-b, \-\-build\fR
+build library of your shared files to send to server (obsolete, as nap
+will do this by default).
+.TP 
+\fB\-B, \-\-build\-only\fR
+build library and exit
+.TP 
+\fB\-N, \-\-nobuild\fR
+do not build library, even if it is out of date 
+.TP 
+\fB\-m, \-\-create\fR
+create a new account with the napster server (obsolete)
+.TP 
+\fB\-r, \-\-reconnect\fR
+keep reconnecting until server connection established 
+.TP 
+\fB\-a, \-\-autorestart\fR
+automatically reconnect when connection to server lost 
+.TP 
+\fB\-q, \-\-daemon\fR
+run without user interface; file sharing only
+.TP 
+\fB\-t, \-\-notitle\fR
+do not display the title bar (fixes messed\-up displays) 
+.TP 
+\fB\-l, \-\-nxterm\fR
+try using a terminal which is compatible with most  systems (fixes
+some messed\-up displays)
+.TP 
+\fB\-T, \-\-transparent\fR
+use the terminal's default background instead of black
+.TP 
+\fB\-n, \-\-noserver\fR
+start up without connecting to a server
+.TP 
+\fB\-f \fI<filename>\fP, \-\-config \fI<filename>\fP\fR
+specifies the config file to use (default ~/.nap/napconf) 
+.TP 
+\fB\-x \fI<filename>\fP, \-\-log \fI<filename>\fP\fR
+log all transfers to a specific filename 
+.TP 
+\fB\-g \fI<filename>\fP, \-\-logall \fI<filename>\fP\fR
+log everything to a specific filename 
+.TP 
+\fB\-s \fI<server>\fP, \-\-server \fI<server>\fP\fR
+select a specific server (multiple \-s opts possible) 
+.TP 
+\fB\-d \fI<n>\fP, \-\-debug \fI<n>\fP\fR
+set debug level 
+.TP 
+\fB\-u \fI<str>\fP, \-\-user \fI<str>\fP\fR
+specify napster username 
+.TP 
+\fB\-p \fI<str>\fP, \-\-pass \fI<str>\fP\fR
+specify user's password 
+.TP 
+\fB\-e \fI<str>\fP, \-\-email \fI<str>\fP\fR
+specify user's email address 
+.TP 
+\fB\-U \fI<dir>\fP, \-\-upload \fI<dir>\fP\fR
+specify upload directory (multiple \-U opts possible) 
+.TP 
+\fB\-D \fI<dir>\fP, \-\-download \fI<dir>\fP\fR
+specify download directory 
+.TP 
+\fB\-I \fI<dir>\fP, \-\-incomplete \fI<dir>\fP\fR
+specify directory for incomplete files 
+.TP 
+\fB\-P \fI<n>[-<m>]\fP, \-\-dataport \fI<n>[\-<m>]\fP\fR
+specify port(s) to use for incoming upload requests
+.TP 
+\fB\-C \fI<n>\fP, \-\-connection \fI<n>\fP\fR
+specify connection speed number, according to the following chart:
+
+ Connection | Number
+ -------------------
+ Unknown    |  0
+ 14.4       |  1
+ 28.8       |  2
+ 33.6       |  3
+ 56.7       |  4
+ 64K ISDN   |  5
+ 128K ISDN  |  6
+ Cable      |  7
+ DSL        |  8
+ T1         |  9
+ T3 or >    | 10
+
+.TP 
+\fB\-M \fI<n>\fP, \-\-maxuploads \fI<n>\fP\fR
+specify maximum number of simultaneous uploads 
+.TP 
+\fB\-o \fI<var>=<value>\fP, \-\-option \fI<var>=<value>\fP\fR
+set user configuration variable
+.SH "CONFIGURATION VARIABLES"
+.LP 
+Configuration variables can be set in the file ~/.nap/napconf, on the
+command line via the \fB\-o\fR option, or interactively via the /set
+command.  Here is an almost complete list of configuration variables:
+.TP
+\fBuser\fR
+your napster username
+.TP
+\fBpass\fR
+your napster password - optional
+.TP
+\fBemail\fR
+your napster email address
+.TP
+\fBupload\fR
+list of upload directories, separated by semicolons
+.TP
+\fBdownload\fR
+your download directory
+.TP
+\fBincomplete\fR
+your directory for incomplete files
+.TP
+\fBconnection\fR
+your connection speed (see \fB\-C\fP option)
+.TP
+\fBmaxuploads\fR
+maximal number of simultaneous uploads allowed
+.TP
+\fBmaxupuser\fR
+maximum number of simultaneous uploads per user
+.TP
+\fBmaxdownloads\fR
+maximum number of simultaneous downloads allowed
+.TP
+\fBmaxdownuser\fR
+maximum number of simultaneous downloads per user
+.TP
+\fBservers\fR
+list of servers, separated by semicolons (note: this is now ignored and overwritten unless nometa is set)
+.TP
+\fBdataport\fR
+port or range of ports to use for client-client connections. Set this to 0 if you are behind a firewall
+.TP
+\fBlogfile\fR
+log file for transfer logs
+.TP
+\fBlogallfile\fR
+log file for logging everything
+.TP
+\fBbandwidthdown\fR
+global bandwidth limit for downloads (in kB/s)
+.TP
+\fBbandwidthdown1\fR
+download bandwidth limit per connection (in kB/s)
+.TP
+\fBbandwidthup\fR
+global bandwidth limit for uploads (in kB/s)
+.TP
+\fBbandwidthup1\fR
+upload bandwidth limit per connection (in kB/s)
+.TP
+\fBannouncepongs\fR
+should receipt of PONG packets be announced?
+.TP
+\fBautopurge\fR
+time to delete stopped items from up- and download lists
+.TP
+\fBautopurgeup\fR
+time to delete stopped items from upload list
+.TP
+\fBautopurgedown\fR
+time to delete stopped items from download list
+.TP
+\fBautoreply\fR
+a string to send as an automatic reply to incoming user messages
+.TP
+\fBautorestart\fR
+automatically reconnect when connection to server lost?
+.TP
+\fBconnecttimeout\fR
+timeout after this many seconds while connecting to server
+.TP
+\fBcursorfollowsscreen\fR
+should PgUp and PgDn move the screen, rather than the cursor, on the search result screen?
+.TP
+\fBdebug\fR
+debug level
+.TP
+\fBidentity\fR
+fake client id for fooling servers that refuse connections from nap client
+.TP
+\fBhash\fR
+shall we calculate MD5 hashes? Note that most servers don't use them.
+.TP
+\fBincompletesuffix\fR
+suffix to use for incomplete files
+.TP
+\fBlibraryfile\fR
+location of your library file
+.TP
+\fBmetaserver\fR
+URL of a napigator-style metaserver
+.TP
+\fBmetatimeout\fR
+timeout for connecting to metaserver
+.TP
+\fBnapping\fR
+relative or absolute filename of the napping program to use
+.TP
+\fBnewstimeout\fR
+timeout for retrieving news
+.TP
+\fBnoechosets\fR
+should the /set command be quiet?
+.TP
+\fBnomasq\fR
+should filename masquerading be disabled?
+.TP
+\fBnometa\fR
+skip connecting to metaserver on startup?
+.TP
+\fBnonews\fR
+do you want to skip news about new releases on startup?
+.TP
+\fBnoping\fR
+do you want to disable pings?
+.TP
+\fBnoresultscreen\fR
+should search results be displayed on the main screen?
+.TP
+\fBnoscroll\fR
+should main screen not scroll to bottom automatically on output?
+.TP
+\fBproxy\fR
+URL of http proxy, if needed to access www through firewall
+.TP
+\fBsavechannels\fR
+should your open channels to be saved between sessions?
+.TP
+\fBsavepass\fR
+should password be saved in config file?
+.TP
+\fBscrollsize\fR
+limit on the number of lines in main screen, or 0 for no limit
+.TP
+\fBsdefaults\fR
+default keystrokes for search result screen appearance
+.TP
+\fBsharetypes\fR
+semicolon-separated list of file extensions to share in addition to mp3 files. Case insensitive. Use '*' for 'all files'.
+.TP
+\fBshowtoomanyuploads\fR
+display a message when upload limit is reached?
+.TP
+\fBturdsize\fR
+size of the largest incomplete file which will be auto-removed
+.SH "COMMANDS"
+.LP 
+Nap has an irc-like interface. Commands start with a slash "/". The
+two most important commands are \fB/search\fP to start a search, and
+\fB/reconnect\fP to cycle through the list of servers. Here is a
+complete list of commands:
+
+\fB/about\fP \- Shows credits
+.TP
+\fB/alias\fP \fI[name]\fP \fI[args]\fP \- Creates an alias, or lists current aliases
+.TP
+\fB/aliaslist\fP \- Shows current list of aliases
+.TP
+\fB/announce\fP \fImsg\fP \- Broadcasts a message to all users
+.TP
+\fB/ban\fP \fI[user/IP]\fP \- Bans the specified user or IP, or lists banned users
+.TP
+\fB/banlist\fP \- Prints a list of the current bans on the server
+.TP
+\fB/block\fP \fI[IP]\fP \fI[reason]\fP \- Blocks the specified IP, or lists blocked users
+.TP
+\fB/blocklist\fP \- Gives a list of current blocked users
+.TP
+\fB/break\fP \- Breaks out of a loop
+.TP
+\fB/browse\fP \fIuser\fP \- Browses user's files
+.TP
+\fB/browse2\fP \fIuser\fP \- Directly browses user's files
+.TP
+\fB/cban\fP \fI[user]\fP \fI[reason]\fP \- Bans a user from a channel, or lists banned users
+.TP
+\fB/cbanlist\fP \- Returns a list of banned users in a channel
+.TP
+\fB/chupload\fP \fIpath\fP \- Changes your upload path (still need to /rebuild to update your files)
+.TP
+\fB/clear\fP \- Clears your screen buffer
+.TP
+\fB/clearalias\fP \- Clears all aliases
+.TP
+\fB/clearhandler\fP \- Clears all handlers
+.TP
+\fB/clist\fP \- Gets a list of channels
+.TP
+\fB/clist2\fP \- Gets a list of channels (includes user created)
+.TP
+\fB/cloak\fP \- Cloaks yourself
+.TP
+\fB/conf\fP \fIconfig\-string\fP \- Request a change in server configuration variables
+.TP
+\fB/cunban\fP \fIuser\fP \fI[reason]\fP \- Unbans a user from a channel
+.TP
+\fB/ddown\fP \fInumber or range\fP \- Deletes downloads by number as returned from /pdown
+.TP
+\fB/dec\fP \- Decreases the variable by one
+.TP
+\fB/debug\fP \fIlevel\fP \- Sets debug level
+.TP
+\fB/disconnect\fP \- Disconnects you from the server
+.TP
+\fB/dlul\fP \- Switches to the download/upload monitor screen
+.TP
+\fB/dns\fP \fIhost/IP\fP \- Attempts to resolve the specified address
+.TP
+\fB/done\fP \- Ends an alias
+.TP
+\fB/dtimer\fP \fI[num]\fP \- Delete the timed event with the given number
+.TP
+\fB/dup\fP \fInumber or range\fP \- Deletes uploads by number as returned from /pup
+.TP
+\fB/echo\fP \fItext\fP \- Echos text to the screen
+.TP
+\fB/eval\fP \fIname\fP \- Returns the value of a variable
+.TP
+\fB/exec\fP \fI[\-o]\fP \fIcommand\fP \- Executes a command from a shell and redirects the input to the client
+.TP
+\fB/fdown\fP \fInumber or range\fP \- Gets information on the user as returned from /pdown
+.TP
+\fB/finger\fP \fIuser\fP \- Gets information on the specified user
+.TP
+\fB/force\fP \fInumber or range\fP \- Forces download of queued items, overriding download limit
+.TP
+\fB/fup\fP \fInumber or range\fP \- Gets information on the user as returned from /pup
+.TP
+\fB/g\fP \fInumber or range\fP \- Gets files by number as returned from /search
+.TP
+\fB/get\fP \fInumber or range\fP \- Gets files by number as returned from /search
+.TP
+\fB/getservers\fP \- Read server list from napigator\-style metaserver
+.TP
+\fB/gusers\fP \- Gets a global list of users
+.TP
+\fB/handler\fP \fI[code]\fP \fI[args]\fP \- Adds a handler, or lists current handlers
+.TP
+\fB/handlerlist\fP \- Returns a list of handlers created
+.TP
+\fB/help\fP \fIcommand\fP \- Returns help on the specified command
+.TP
+\fB/hotlist\fP \fI[user]\fP \- Adds a user to your hotlist, or shows current hotlist
+.TP
+\fB/if (\fIval\fP \fIop\fP \fIval\fP)\fP \fIcmd\fP \- Compares two values
+.TP
+\fB/ignore\fP \fI[user]\fP \- Ignores a user, or lists all ignored users
+.TP
+\fB/ignoreclear\fP \- Clears your ignore list
+.TP
+\fB/ignorelist\fP \- Lists ignored users
+.TP
+\fB/inc\fP \fIvar\fP \- Increases the variable by 1
+.TP
+\fB/irc\fP \- No help available
+.TP
+\fB/join\fP \fI[chan]\fP \- Joins the specified channel, or lists all channels
+.TP
+\fB/kick\fP \fIuser\fP \fI[reason]\fP \- Kicks a user from a channel
+.TP
+\fB/kickall\fP \fIuser\fP \fI[reason]\fP \- Kicks a user from all channels you and the user are in
+.TP
+\fB/kill\fP \fIuser\fP \- Kills the specified user
+.TP
+\fB/lastlog\fP \fIstr\fP \- Returns all occurences of "str" that have been said or printed
+.TP
+\fB/loadalias\fP \fI[filename]\fP \- Loads a list of aliases from a file
+.TP
+\fB/loadchannels\fP \fI[filename]\fP \- Reads channels from a filename and joins them
+.TP
+\fB/loadconfig\fP \fI[filename]\fP \- Loads a list of settings from a filename
+.TP
+\fB/loadhandler\fP \fI[filename]\fP \- Loads a list of handlers from a filename
+.TP
+\fB/me\fP \fIstring\fP \- Does an emotion
+.TP
+\fB/msg\fP \fIuser\fP \fImsg\fP \- Sends the user the message specified
+.TP
+\fB/muzzle\fP \fIuser\fP \fImsg\fP \- Muzzles the user with the specified message
+.TP
+\fB/names\fP \fIchannel\fP \- Gets a list of channel users
+.TP
+\fB/news\fP \- Checks for any news on the client
+.TP
+\fB/noprint\fP \- Stops the client from echoing anything until the command returns
+.TP
+\fB/notify\fP \fI[user]\fP \- Adds a user to your hotlist, or shows current hotlist
+.TP
+\fB/opsay\fP \fImsg\fP \- Broadcasts a message to all moderators/admins/elite
+.TP
+\fB/part\fP \fI[chan/user]\fP \- Parts the specified or current channel or query
+.TP
+\fB/pchans\fP \- Shows which channels you are on
+.TP
+\fB/pdown\fP [dqsf] \- Gives a listing of your current downloads. Optional flags select downloading, queued, succeeded, failed items.
+.TP
+\fB/ping\fP \fIuser\fP \- Pings a user
+.TP
+\fB/psocks\fP \- Print the socket list (for debugging purposes)
+.TP
+\fB/pup\fP \- Gives a listing of your current uploads
+.TP
+\fB/purge\fP \- Removes all stopped items from upload and download lists
+.TP
+\fB/purgedown\fP \- Removes all stopped items from download list
+.TP
+\fB/purgeup\fP \- Removes all stopped items from upload list
+.TP
+\fB/pvars\fP \- Prints the values of all variables currently set
+.TP
+\fB/query\fP \fIuser\fP \- Queries a user
+.TP
+\fB/q\fP \- Closes the program 
+.TP
+\fB/quit\fP \- Closes the program 
+.TP
+\fB/rebuild\fP \- Rebuilds your library unconditionally. See also /update
+.TP
+\fB/reconnect\fP \- Reconnects you to the next available server on the list
+.TP
+\fB/reload\fIconfig\-variable\fP \- Resets server configuration parameter to its default value
+.TP
+\fB/reloadm\fP \- Reloads the user command module (only if supported)
+.TP
+\fB/repeat\fP \fI[min:sec] [cmd]\fP \- Initiates a timed event which repeats every <min:sec> interval
+.TP
+\fB/results\fP \- Switches to the search results screen
+.TP
+\fB/retry\fP \fInumber or range\fP \- Puts stopped downloads back in the download queue
+.TP
+\fB/retryall\fP \- Puts all stopped downloads back in the download queue
+.TP
+\fB/savealias\fP \fI[filename]\fP \- Saves current aliases
+.TP
+\fB/savechannels\fP \fI[filename]\fP \- Saves current channels to a filename
+.TP
+\fB/saveconfig\fP \fI[filename]\fP \- Saves current settings to a filename
+.TP
+\fB/savehandler\fP \fI[filename]\fP \- Saves current handlers to a filename
+.TP
+\fB/say\fP \fImsg\fP \- Sends msg to the current channel
+.TP
+\fB/search\fP \fI[-b>bitrate] [-c>speed] [-r>freq] [-s>size] [-d>duration] [-x exclude]... [-t filetype] [-mmaxresults] [-l] [-p] [-f] query\fP \- Searches the napster database
+.TP
+\fB/serv\fP \fI[IP:port]\fP \- Connects to the specificed server and port, or shows current server and port
+.TP
+\fB/server\fP \fI[IP:port]\fP \- Connects to the specificed server and port, or shows current server and port
+.TP
+\fB/set\fP \fI[name]\fP \fI[value]\fP \- Sets a user variable, or prints current values
+.TP
+\fB/setdataport\fP \fIuser\fP \fIport\fP \- Sets a user's data port
+.TP
+\fB/setlevel\fP \fIchannel\fP \fIlevel\fP \- ?
+.TP
+\fB/setlinespeed\fP \fIuser\fP \fIspeed\fP \- Changes a user's linespeed
+.TP
+\fB/setpassword\fP \fIuser\fP \fIpassword\fP \- Sets a user's password
+.TP
+\fB/setuserlevel\fP \fIuser\fP \fIlevel\fP \- Changes a user's userlevel
+.TP
+\fB/sraw\fP \fItype\fP \fIstring\fP \- Send raw command to the server
+.TP
+\fB/stop\fP \- Returns from the current command and stops all processing on it
+.TP
+\fB/sver\fP \- Returns the server version
+.TP
+\fB/tell\fP \fIuser\fP \fImsg\fP \- Sends the user the message specified
+.TP
+\fB/timer\fP \fImin:sec\fP \fIcmd\fP \- Initiates a timer to execute in the specified time
+.TP
+\fB/tlist\fP \- Prints out a list of the current timers
+.TP
+\fB/topic\fP \fIchannel\fP \fItopic\fP \- Changes a channel's topic
+.TP
+\fB/tquit\fP \- Quits when all remaining transfers have completed. Can be canceled with /unquit
+.TP
+\fB/unalias\fP \fIname\fP \- Removes an alias
+.TP
+\fB/unban\fP \fIIP\fP \- Unbans the specified IP
+.TP
+\fB/unblock\fP \fIIP\fP \- Unblocks the specified IP
+.TP
+\fB/unhandler\fP \fIcode\fP \- Removes a handler
+.TP
+\fB/unhotlist\fP \fIuser\fP \- Removes a user from your hotlist
+.TP
+\fB/unignore\fP \fIuser\fP \- Unignores a user
+.TP
+\fB/unmuzzle\fP \fIuser\fP \- Unmuzzles the user
+.TP
+\fB/unnotify\fP \fIuser\fP \- Removes a user from your hotlist
+.TP
+\fB/unquit\fP \- Cancels the effect of /tquit
+.TP
+\fB/unset\fP \fIname\fP \- Unsets a variable
+.TP
+\fB/update\fP \- Rebuilds your library if necessary. See also /rebuild
+.TP
+\fB/while (\fIval\fP \fIop\fP \fIval\fP) cmd\fP \- Keeps executing cmd while the comparison is true
+.TP
+\fB/whois\fP \fIuser\fP \- Gets information on the specified user
+.TP
+\fB/window\fP \- Enables/disables window mode
+.TP
+\fB/wstats\fP \- No help available
+.SH "SIGNALS"
+When nap receives a USR1 signal, it reconnects to a server. The
+behavior is the same as if a \fB/reconnect\fP command had been
+issued.
+.SH "FILES"
+.LP 
+\fI/etc/naprc\fP
+.br
+\fI$HOME/.nap/napconf\fP 
+.br 
+\fI$HOME/.nap/aliases\fP 
+.SH "AUTHORS"
+Nap was originally written by Kevin Sullivan <nite@gis.net>. It is
+currently maintained by Peter Selinger <selinger@users.sourceforge.net>. 
+For the complete list of contributors, see the file AUTHORS.
+.SH "LICENSE"
+Copyright (c) 2000 Kevin Sullivan.  All rights reserved.
+
+Permission is granted to anyone to use this software for any purpose on
+any computer system, and to alter it and redistribute it, subject
+to the following restrictions:
+
+1. The origin of this software must not be misrepresented, either by
+explicit claim or by omission.  Since few users ever read sources,
+credits must also appear in the documentation.
+
+2. Altered versions must be plainly marked as such, and must not be
+misrepresented as being the original software.  Since few users ever
+read sources, credits must also appear in the documentation.
+
+3. All advertising materials mentioning features or use of this
+software must display the following acknowledgement: This product
+includes software developed by Kevin Sullivan.
+
+4. The name of the Author may not be used to endorse or promote
+products derived from this software without specific prior written
+permission.
+
+5. This notice, and any references to this notice in the source,
+documentation, or binary, may not be removed or altered.
+
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS
+BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

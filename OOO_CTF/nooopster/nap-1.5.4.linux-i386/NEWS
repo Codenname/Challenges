@@ -1,0 +1,364 @@
+   November 4, 2006: Release 1.5.4. This release changes the default
+   meta-server to www.gotnap.com.
+
+   May 6, 2004: Release 1.5.3.  This release is in response to the recent
+   disappearance  of  the  "napigator"  meta-servers.   The  new  default
+   meta-server is  http://naplist.com/servers.php.  For future reference,
+   note that the  command line option '-ometaserver=URL' can  be `used to
+   specify  an alternative  meta-server. This  will work  as long  as the
+   format of the data served by the meta-server does not change. Also see
+   scripts/get-servers.sh  for a  sample shell  script which  generates a
+   server list.
+
+   May  31,  2003:  Release 1.5.2. The main purpose of this release is to
+   make  nap  compile under gcc 3.3; most users with precompiled versions
+   probably  won't  need to update. A few minor bugs have been fixed. The
+   only  new  feature  added  is a user variable "identity" for setting a
+   fake  client  id  string, for fooling servers which refuse connections
+   from  nap  clients  into believing that we're a different client. This
+   release includes contributions by Massimo Dal Zotto and Peter Naulls.
+
+   December 9, 2002: This  release fixes an incompatibility with Slavanap
+   2.3.0, which  caused nap  to always return  "0 search  results". Also,
+   some  new search options  were added:  it is  now possible  to specify
+   keywords to  be excluded from a  search, to limit song  length, and to
+   specify  file types  to  search  for. The  library  building code  was
+   changed so that  not the entire library has to be  rebuilt each time a
+   new  file  is added.  Also,  nap  no  longer calculates  checksums  by
+   default, since  most servers  ignore them anyway.  The list  of shared
+   files is  now sent to the  server in the  background, reducing waiting
+   times. Filename masquerading was added; nap by default no longer sends
+   the absolute pathname of your upload directory to the server. This can
+   prevent your real username from  being announced to the world. The old
+   behavior can  be emulated by  setting the "nomasq" user  variable. The
+   problem  with  downloads  that  are  stuck at  "100%"  was  solved.  A
+   --noserver option was  added for starting nap without  connecting to a
+   server. A man  page was added. A bug was fixed  that caused crashes on
+   the Linux for PowerPC platform. A bug that caused crashes on some .ogg
+   files was fixed.  Auto-configuration  was tweaked to compile better on
+   Solaris.  Support for  napster-style meta-servers  was  dropped, since
+   these no longer seem to  exist. This release includes contributions by
+   Zovier.  Massimo Dal  Zotto  and Michael  Pritchard  have helped  with
+   debugging.
+
+   March  2, 2002:  Release 1.5.0.   Nap just  got a  lot easier  to use,
+   thanks to many useful new features added by Suzanne Skinner.  The most
+   important  change is  the addition  of a  new  download/upload screen,
+   accessible  via the "F3"  key.  On  this screen,  one can  monitor and
+   manipulate downloads  and uploads with  a few convenient  key strokes.
+   Other new  features include repeating timer  events, shortcut commands
+   '/' and '  ' for entering commands or searches  from the search result
+   screen  or  download/upload  screen,  no  more  annoying  prompts  for
+   password  and email  (nap  will  simply guess  them),  and http  proxy
+   support. A bug was fixed  where the "incomplete" suffix was not always
+   removed from downloaded files,  and another where nap sometimes failed
+   to create  the ~/.nap directory.  This  release includes contributions
+   by Suzanne  Skinner, Steffen Pingel, Robin Blanchard,  and Massimo Dal
+   Zotto.
+
+   February  9,  2002: Release 1.4.9. This release fixes an annoying bug.
+   The  bug  is  actually  in  WinMX2.6,  not in nap. The problem is that
+   WinMX2.6  always  claims that its upload limit is 0, even when in fact
+   it  is  not.  As  a  result, nap 1.4.8 decided not to "remotely queue"
+   anything  from  a  WinMX  client.  This  release fixes the problem, by
+   simply  remotely  queueing  anything,  even  when  the remote client's
+   upload limit appears to be 0.
+
+   January  28,  2002: Release 1.4.8. The main purpose of this release is
+   to  adapt  to  the new location and format of Napigator's server list.
+   The  release  also  contains  a  number of minor bug fixes and feature
+   enhancements.  "Remote  queueing"  has been improved. A bug in sharing
+   ogg  files  has  been  fixed.  /fup  and /fdown commands were added to
+   finger  multiple users from the up- and download lists. Nap can now be
+   caused  to  reconnect to a server by sending it a USR1 signal; this is
+   sometimes  useful  in daemon mode. This release includes contributions
+   by Mike Castle and Darren Embry.
+
+   November  11,  2001:  Release  1.4.7.  This  release contains some new
+   features,  notably  support  for  sharing  Ogg  Vorbis  files, and for
+   sharing  non-music  files,  which more and more users were asking for.
+   Also,  some  basic  networking  code  has been rewritten to make nap's
+   network  connections more reliable. In particular, there was a problem
+   with  downloads failing with the error message "transport endpoint not
+   connected", which only seemed to happen on newer kernels and/or faster
+   machines.  This  problem  has been fixed. Also, many memory leaks have
+   been  fixed,  and  the  main  scroll  of  the  main  window  has  been
+   re-implemented  to  be  more  memory  efficient.  A  new user variable
+   "scrollsize"  was  added to limit the size of the main scroll; default
+   is  10000 lines. User variables "autopurgeup" and "autopurgedown" were
+   added  to  automatically  purge  stopped  items  from  the  upload and
+   download  lists.  A  FreeBSD  distribution  was added, thanks to Robin
+   Blanchard.  The  ability  to  sort search results by directory, rather
+   than  filename,  was  added.  A bug which caused foreign characters to
+   mess  up  the browse result screen was fixed. Some segmentation faults
+   and  broken  pipes were eliminated. The way new releases are announced
+   during  startup  was  improved. This release includes contributions by
+   Jonathan Lupa. Mike Castle has helped debugging the networking code.
+
+   August  30,  2001:  Release  1.4.6.  This release contains several new
+   features  that  users  were requesting. Probably the most important is
+   the  ability to limit the bandwidth for uploads and downloads. Also, a
+   helper  application  called  "napping"  was added which assists nap in
+   providing  ping  results.  The  point  is  that  sending  ping packets
+   requires  root  privileges.  Unlike  nap itself, napping can be safely
+   installed  suid  root, since it drops suid immediately after the first
+   system  call.  Support  for  direct  ("client-to-client") browsing was
+   added,  although its immediate usefulness is questionable, considering
+   that most other clients do not support it.
+
+   Other  changes:  The  name  and  location  of  the library file is now
+   configurable,  which  some  users  had  requested  (particularly where
+   several  users were sharing the same library file). Also, there is now
+   an   optional  global  config  file,  /etc/naprc,  which  may  contain
+   system-wide   default   configuration  options.  These  can  still  be
+   overridden  by  the user. A "--transparent" option was added for those
+   users  who  use  eterm or similar with a pretty background image: this
+   causes  nap  to  use the default background instead of black (requires
+   ncurses-5.2).  The behavior of Ctrl-W on the main screen was improved,
+   and  Ctrl-L now works on the search result screen. A firewall question
+   was  added  to  the interactive setup. Estimated times of arrival were
+   added.  A  filtering  option  was added to the /pdown command. Also, a
+   variety  of  bugs and small glitches were fixed. This release includes
+   contributions  by  Nufsi,  Matthew Rench, Steffen Pingel, Jesse Pavel,
+   and Sebastian Zagrodzki.
+
+   July  1,  2001:  Release 1.4.5. After more than two months, this is an
+   overdue  release. I incorporated many patches and bug reports, as well
+   as  adding some new features. The main new feature is that the OpenNap
+   servers  are  now  the  default  for  nap. The reason for this is that
+   Napster Inc.   has   modified  their  servers  to  use  a  new  client
+   authentification  scheme,  which means nap users can no longer connect
+   to  their servers. Nap will automatically download a list of available
+   servers  from  napigator.com,  and then connect to the first available
+   one.
+
+   Other  changes:  A Windows (cygwin32) distribution has been added. Nap
+   now  fully  supports  VBR  (variable bitrate) files. Various segfaults
+   were  removed.  Commands  such  as  /set,  /alias,  /server  etc. were
+   modified  to  do  something  useful  when  no arguments are given. The
+   appearance  of the search result screen can now be customized, and the
+   result  screen  is not reset when switching back and forth to the main
+   screen. A /getservers command was added to read a list of servers from
+   napigator.com.  The  /reconnect  command  was modified to cycle to the
+   next server on the list, rather than starting from the top of the list
+   each  time.  PONG  packages  are  now  ignored by default. The various
+   binary distributions are now statically linked, to avoid problems with
+   missing  shared  libraries.  This  release  includes  contributions by
+   Nufsi,  Rüdiger  Kuhlman,  Mark Glines, Steffen Pingel, Matthew Rench,
+   and Pawel Fedorynski.
+
+   Nap's  [1]sourceforge  project  page has been updated and is now fully
+   operational.  You  are  encouraged to use sourceforge's facilities for
+   bug reports, feature requests etc.
+
+   July  1,  2001:  Release 1.4.5. After more than two months, this is an
+   overdue  release. I incorporated many patches and bug reports, as well
+   as  adding some new features. The main new feature is that the OpenNap
+   servers  are  now  the  default  for  nap. The reason for this is that
+   Napster Inc.   has   modified  their  servers  to  use  a  new  client
+   authentification  scheme,  which means nap users can no longer connect
+   to  their servers. Nap will automatically download a list of available
+   servers  from  napigator.com,  and then connect to the first available
+   one.
+
+   Other  changes:  A Windows (cygwin32) distribution has been added. Nap
+   now  fully  supports  VBR  (variable bitrate) files. Various segfaults
+   were  removed.  Commands  such  as  /set,  /alias,  /server  etc. were
+   modified  to  do  something  useful  when  no arguments are given. The
+   appearance  of the search result screen can now be customized, and the
+   result  screen  is not reset when switching back and forth to the main
+   screen. A /getservers command was added to read a list of servers from
+   napigator.com.  The  /reconnect  command  was modified to cycle to the
+   next server on the list, rather than starting from the top of the list
+   each  time.  PONG  packages  are  now  ignored by default. The various
+   binary distributions are now statically linked, to avoid problems with
+   missing  shared  libraries.  This  release  includes  contributions by
+   Nufsi,  Rüdiger  Kuhlman,  Mark Glines, Steffen Pingel, Matthew Rench,
+   and Pawel Fedorynski.
+
+   Nap's  [2]sourceforge  project  page has been updated and is now fully
+   operational.  You  are  encouraged to use sourceforge's facilities for
+   bug reports, feature requests etc.
+
+   July  1,  2001:  Release 1.4.5. After more than two months, this is an
+   overdue  release. I incorporated many patches and bug reports, as well
+   as  adding some new features. The main new feature is that the OpenNap
+   servers  are  now  the  default  for  nap. The reason for this is that
+   Napster Inc.   has   modified  their  servers  to  use  a  new  client
+   authentification  scheme,  which means nap users can no longer connect
+   to  their servers. Nap will automatically download a list of available
+   servers  from  napigator.com,  and then connect to the first available
+   one.
+
+   Other  changes:  A Windows (cygwin32) distribution has been added. Nap
+   now  fully  supports  VBR  (variable bitrate) files. Various segfaults
+   were  removed.  Commands  such  as  /set,  /alias,  /server  etc. were
+   modified  to  do  something  useful  when  no arguments are given. The
+   appearance  of the search result screen can now be customized, and the
+   result  screen  is not reset when switching back and forth to the main
+   screen. A /getservers command was added to read a list of servers from
+   napigator.com.  The  /reconnect  command  was modified to cycle to the
+   next server on the list, rather than starting from the top of the list
+   each  time.  PONG  packages  are  now  ignored by default. The various
+   binary distributions are now statically linked, to avoid problems with
+   missing  shared  libraries.  This  release  includes  contributions by
+   Nufsi,  Rüdiger  Kuhlman,  Mark Glines, Steffen Pingel, Matthew Rench,
+   and Pawel Fedorynski.
+
+   Nap's  [3]sourceforge  project  page has been updated and is now fully
+   operational.  You  are  encouraged to use sourceforge's facilities for
+   bug reports, feature requests etc.
+
+   July  1,  2001:  Release 1.4.5. After more than two months, this is an
+   overdue  release. I incorporated many patches and bug reports, as well
+   as  adding some new features. The main new feature is that the OpenNap
+   servers  are  now  the  default  for  nap. The reason for this is that
+   Napster Inc.   has   modified  their  servers  to  use  a  new  client
+   authentification  scheme,  which means nap users can no longer connect
+   to  their servers. Nap will automatically download a list of available
+   servers  from  napigator.com,  and then connect to the first available
+   one.
+
+   Other  changes:  A Windows (cygwin32) distribution has been added. Nap
+   now  fully  supports  VBR  (variable bitrate) files. Various segfaults
+   were  removed.  Commands  such  as  /set,  /alias,  /server  etc. were
+   modified  to  do  something  useful  when  no arguments are given. The
+   appearance  of the search result screen can now be customized, and the
+   result  screen  is not reset when switching back and forth to the main
+   screen. A /getservers command was added to read a list of servers from
+   napigator.com.  The  /reconnect  command  was modified to cycle to the
+   next server on the list, rather than starting from the top of the list
+   each  time.  PONG  packages  are  now  ignored by default. The various
+   binary distributions are now statically linked, to avoid problems with
+   missing  shared  libraries.  This  release  includes  contributions by
+   Nufsi,  Rüdiger  Kuhlman,  Mark Glines, Steffen Pingel, Matthew Rench,
+   and Pawel Fedorynski.
+
+   Nap's  [4]sourceforge  project  page has been updated and is now fully
+   operational.  You  are  encouraged to use sourceforge's facilities for
+   bug reports, feature requests etc.
+
+   April  23,  2001:  Release  1.4.4-ps9.  This  release  has tons of new
+   features,  and  in addition the inner workings of nap were re-designed
+   in  a major way. There's a possibility for new bugs, although the code
+   seems  very  stable.  However,  consider  it a beta release; if you're
+   squeamish  about  bugs, consider waiting until the next release before
+   you  update.  However,  maybe  you  just  can't live without these new
+   features:
+
+     * Queueing.  Nap  is  now  fully able to deal with queued downloads,
+       even remotely queued ones. ("Remotely queued" really means we keep
+       trying the download until it succeeds). Uploads and downloads that
+       are   stopped   (timed   out,   incomplete   etc)  are  no  longer
+       automatically  removed  from  the download list; stopped downloads
+       can  now be reactivated (although not yet "resumed": the file will
+       start  loading  from  0  again).  Total  and  per-user  upload and
+       download limits can be set.
+     * Sorting. Search results can now be sorted by various criteria.
+     * And  more...  Dependency on endianness was reduced; nap should now
+       work  reasonably  well,  though  not  yet perfectly, on big-endian
+       machines  such  as  Sparc. The command history feature on the main
+       screen  was  re-designed. The screen switching code was rewritten,
+       removing   more  segfaults.  Usage  messages  for  nap's  internal
+       commands  have  been  improved. The suffix for incomplete files is
+       now  user configurable. A feature was added to allow passwords and
+       email  addresses  for  multiple  users  in  a  single config file.
+       Unsuccessful  attempts to connect to a server are now subject to a
+       user-configurable  timeout;  this  is useful if you have a list of
+       servers  to  connect  to.  Config  files now reside in a directory
+       ~/.nap,  rather  than  cluttering  up  your  home directory. (Some
+       existing  config files are automatically moved to the new location
+       when  you  upgrade).  The  "~/" syntax is now allowed in many path
+       names,  particularly  the  upload and download paths, and a sample
+       script  for  running nap under screen(1) was added (thanks Massimo
+       Dal  Zotto).  File  sizes  on  search  result  screen  can  now be
+       displayed  in  bytes  or  megabytes. Searches have a new option to
+       limit  the  size  of the files searched for (OpenNap only - thanks
+       Sascha  Lüdecke).  Search screen has a new "help" feature. Several
+       commands  such  as  /ddown can now take a set of numeric ranges as
+       arguments (such as 1-3,5).
+
+   April  19,  2001: Release 1.4.4-ps8. I added a feature which users had
+   been  wanting for a long time: now there is an "incomplete" directory,
+   where  your  incomplete  downloads  go,  in addition to the "download"
+   directory,  where  only  completed  downloads  go.  Downloads that are
+   interrupted while they are still incomplete remain in the "incomplete"
+   directory (and they are tagged to facilitate a later resume - however,
+   resumes  are  not  yet  implemented in this version). Incomplete files
+   that  are  too  small  (less  than  100000  bytes  or the value of the
+   variable  "turdsize",  if set), are deleted immediately. Other changes
+   include: checksums are now calculated in a way even closer to what the
+   official Windows client does; fixed cursor positioning bugs of release
+   ps7;  fixed  additional  segfaults (notably when pressing Ctrl-T while
+   not on a channel); disabled support for dynamically linked user object
+   library (was anybody ever using this?); improved debugging output.
+
+   April  16, 2001: Release 1.4.4-ps7 has some new features, and many old
+   bugs  fixed.  Fixed  the bug which caused nap to prompt for the user's
+   password  even  if  the password was given in the config file. Added a
+   "savepass"  user variable to allow passwords to be saved to the config
+   file.  All  user variables can now be set on the command line with the
+   --option option. Added --nobuild option to avoid building the library.
+   Added  autoreply feature which will reply to messages sent to you when
+   in  non-interactive  mode  (see "Messages" in the User Guide). Nap now
+   replaces  double  quotes  by  single quotes when chatting, rather than
+   letting  the  server cut them off. Added some now keybindings, such as
+   Ctrl-K for deleting the rest of the line. Finally, automatically check
+   online  to  see  if  there is a new release and alert the user if yes.
+   This can be turned off by setting nonews=1.
+
+   April  12,  2001:  Release 1.4.4-ps6 is a quick bug fix. A last minute
+   bug prevented config files from being created.
+
+   April 12, 2001: Release 1.4.4-ps5 is mainly a bug fix release. I fixed
+   two  nasty  bugs  which  caused nap to apparently freeze. One of these
+   bugs  was  introduced  in 1.4.4-ps4 and caused nap to starve all other
+   connections (including user input) during an upload. The other one was
+   an  old  bug  which caused nap to freeze sometimes when switching back
+   and  forth  between the main screen and the result screen using F1 and
+   F2. Also new in 1.4.4-ps5:
+     * Fixed  security  loophole  which  allowed remote clients to access
+       arbitrary files on our system.
+     * Now nap creates the config file automatically if none exists. This
+       eliminates  the  need  to manually create the file .napconf. Also,
+       unified  the  concepts  of  user  variables and options set in the
+       config file; these are now one and the same thing.
+     * Now   nap   automatically   detects  whether  your  library  needs
+       rebuilding;  it  is no longer necessary to do this explicitly with
+       the "-b" flag.
+     * Help   new   users  by  giving  more  meaningful  error  messages,
+       particularly  if  one  forgets  to  type "/" at the beginning of a
+       command.
+     * Added /savechannels and /loadchannels commands to save and restore
+       the  channels you're on. Also documented the (previously existing)
+       feature of how to do this automatically.
+     * Fixed  some  bugs  with  hotlists  that caused segfaults on 64-bit
+       machines (Thanks Nikita Schmidt).
+
+   April  9,  2001:  Release  1.4.4-ps4 is a bug fix release. There was a
+   fatal  bug  in  1.4.4-ps3 which prevented all uploads (unless you were
+   behind  a  firewall).  Please  upgrade  immediately  and  destroy  all
+   existing copies of nap-1.4.4-ps3. Also new in 1.4.4-ps4:
+     * additional control over what is displayed on the result screen
+     * some  command  line  parameters  can  now  be accessed as internal
+       variables and manipulated with the commands /set, /unset, /pvars.
+     * remaining  id3v2 bug fixed; all id3v2 files should now be sharable
+       and downloadable
+     * MD5  hashes  are now calculated in the same way that other napster
+       clients do it
+
+   Some other features that were added since 1.4.4:
+     * Allow  nap  to  run  quietly  in the background, serving files and
+       automatically reconnecting whenever the server disconnects
+     * Changed   names   and   default  location  of  config  files,  and
+       liberalized  their  format  to  allow for comments and whitespace.
+       Also prompt user for missing information, rather than croaking.
+     * Posix-style long options, and many additional command line options
+       for overriding settings in config file
+     * Allow  user  to  specify  multiple  napster servers, to connect to
+       first available one.
+     * Allow  a range of ports (e.g. 6699-6799) for incoming connections:
+       specifying  an  unavailable  port  used to force nap into firewall
+       mode (relevant e.g. when running two copies of nap).
+     * OpenBSD compatibility (Thanks Geoff The)
+     * ...and more

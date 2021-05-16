@@ -1,0 +1,69 @@
+***********************************************************
+Linux Napster Client, instructions for Windows distribution
+***********************************************************
+
+Nap was written by Kevin Sullivan, and modified by Peter Selinger and
+others. See COPYRIGHT, ChangeLog, and AUTHORS.
+
+
+This file contains instructions specific to the Windows distribution
+of nap. Please see README for general information on usage etc.
+
+
+INSTALLATION for Windows 95/98/2000/NT:
+
+Download the file nap-XXX.cygwin32.zip, and unpack it with
+
+        pkunzip nap-XXX.cygwin32.zip
+
+(Note: pkunzip is a relatively dumb program. My version of it, which
+came with Windows 98, does not understand long filenames, and you may
+have to type something of the form "pkunzip nap-1.~1.zip". Instead of
+creating a directory, it may decide to dump the files in the current
+working directory, and it may rename them. Use "unzip" instead of
+"pkunzip" if it is available.)
+
+The windows distribution includes two executable file nap.exe and
+napping.exe, and two dll's (dynamically linked libraries)
+cygncurses5.dll and cygwin1.dll.  You need to put these dll's in a
+place where Windows can find them, before running nap.exe.  You also
+need to put napping.exe in a place where Windows can find it. One way
+to do this is to copy all four files to a location (such as
+C:\WINDOWS) where Windows looks for dll's and executable
+files. Another way is to amend your PATH environment variable, by
+adding something like the following line to C:\AUTOEXEC.BAT:
+
+        PATH=%PATH%;C:\DIRECTORY\WHERE\FILES\ARE
+
+If you already have a different version of cygwin installed, you
+cannot use this binary unless you up/downgrade to the version of
+cygwin that comes with the nap distribution. However, there should be
+no problem re-compiling nap under your version of cygwin.
+
+RUNNING:
+
+Nap on Windows runs exactly the same way as under Linux and other
+Unix-like operating systems, due to the amazing magic of cygwin
+(http://sources.redhat.com/cygwin/), which simulates a unix
+environment under Windows. However, there are two caveats:
+
+* Performance: the ncurses implementation under cygwin appears to be
+  very inefficient, resulting in a relatively slow screen update.
+  Thus, characters will appear much more slowly on the screen than
+  under Linux and friends.
+
+* Location of config files: under Linux & co., nap puts its
+  configuration files in a directory called .nap in the user's home
+  directory. Under Windows, there is no such thing as a user's home
+  directory, and nap will by default look for the .nap directory in
+  the *current working directory*. You can change this behavior by
+  defining an environment variable HOME. I do this by something like
+  the line
+
+        set HOME=C:\SOME\DIRECTORY
+
+  in my C:\AUTOEXEC.BAT. This will cause nap to look for (and create) its
+  configuration files in the directory C:\SOME\DIRECTORY\.nap.
+
+
+For usage and other non-Windows specific information, see README.

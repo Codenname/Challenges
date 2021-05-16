@@ -1,0 +1,121 @@
+WHAT TO DO WHEN NCURSES IS MISSING.
+
+Nap needs a screen handling package called "ncurses". Some operating
+systems do not come with ncurses installed. Notably, this is the case
+for Solaris and for MacOSX. In these cases, you need to install
+ncurses yourself. Here are some instructions. When in doubt, or if
+something is not working, please refer to the instructions that come
+with the ncurses package.
+
+Note: some binary distributions of nap come with a file called
+ncurses.so.5 or similar. If you are installing nap from a binary
+distribution, see BINARY DISTRIBUTIONS below. The following
+instructions are for those who want to compile nap themselves.
+
+IF YOU HAVE ROOT PRIVILEGES:
+
+1) Download ncurses-5.2 (or later) from www.gnu.org. At the time of
+   this writing (December 2002), the correct URL is
+   http://www.gnu.org/directory/GNU/ncurses.html.
+
+2) From the main ncurses directory, run the following commands:
+   
+   ./configure --with-shared --without-debug
+   make
+   make install.libs
+
+   If you want to build your own terminfo database, run
+
+   make install.progs
+   make install.data
+
+   If you want to install the man pages (there are thousands of them), 
+   run
+
+   make install.man
+
+3) Compile nap: From the main nap directory, do "./configure",
+   followed by "make", followed, optionally, by "make install". 
+   See the NOTES below for some hints on running nap.
+
+IF YOU DO NOT HAVE ROOT PRIVILEGES:
+
+1) Download ncurses-5.2 (or later) from www.gnu.org. At the time of
+   this writing (December 2002), the correct URL is
+   http://www.gnu.org/directory/GNU/ncurses.html.
+
+2) Create an empty directory $foo somewhere in your private file
+   space. Then run the following commands from the main ncurses
+   directory:
+
+   ./configure --prefix=$foo --with-shared --without-debug
+   make
+   make install.libs
+   
+   If you want to build your own terminfo database, run
+
+   make install.progs
+   make ticdir=$foo/lib/terminfo install.data
+
+   If you want to install the man pages (there are thousands of them),
+   run 
+
+   make install.man
+
+3) Compile and link nap with the following command:
+
+   make CFLAGS="-g -O2 -I$foo/include" -L$foo/lib"
+
+   Every time before running nap, you must set the shared library path
+   for the dynamic linker, and you must tell ncurses where to look for
+   your terminfo database (if you built your own terminfo database):
+
+   (if you are using sh or bash:)
+   export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$foo/lib"
+   export TERMINFO=$foo/lib/terminfo
+
+   (if you are using csh or tcsh:)
+   setenv LD_LIBRARY_PATH "$LD_LIBRARY_PATH:$foo/lib"
+   setenv TERMINFO $foo/lib/terminfo
+
+   See NOTES below for some hints on running nap.
+
+BINARY DISTRUBUTIONS:
+
+If you obtained a binary distribution for nap which came with the file
+ncurses.so.5 or similar, and if nap complains that it cannot find this
+file, you need to do one of two things:
+
+a) put the file ncurses.so.5 somewhere where the dynamic linker looks
+for shared libraries, typically /usr/lib or /usr/local/lib, or
+
+b) set the LD_LIBRARY_PATH environment variable to contain a path to
+the directory $lib which contains the ncurses.so.5 file:
+
+   export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$lib"  (for sh and bash)
+   setenv LD_LIBRARY_PATH "$LD_LIBRARY_PATH:$lib"  (for csh and tcsh)
+
+You need to set LD_LIBRARY_PATH each time you want to run nap, unless
+you put the above commands in your .bashrc or .tcshrc file.
+
+Important: the ncurses.so.5 file distributed with nap assumes that
+your terminfo database is located at /usr/share/lib/terminfo. If it is
+in a different location, you must set the TERMINFO environment
+variable to the location, e.g.
+
+   export TERMINFO=/usr/share/terminfo
+
+NOTES ON RUNNING NAP:
+
+On some systems, if nap runs in an xterm, it will run in black
+and white, without color support. You may be able to enable color by
+setting the TERM environment variable to "xtermc".
+
+Also, not all keys may behave properly. For instance, the arrow keys,
+PgUp and PgDn keys, and/or F1-F3 keys may not work as desired. I am
+not sure why this is the case. Use 'q' instead of F1, "/results"
+instead of F2, and "/dlul" instead of F3.
+
+
+PS1 2001/09/01
+PS1 2002/12/08

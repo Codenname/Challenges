@@ -1,0 +1,178 @@
+********************
+Linux Napster Client
+********************
+
+Written by Kevin Sullivan. See COPYRIGHT.
+
+Modified by Peter Selinger and others. See ChangeLog and AUTHORS.
+
+
+INSTALLATION:
+
+To compile nap from sources, first do "./configure", followed by
+"make". This will create the files "nap" and "napping". If you
+downloaded a binary distribution for your platform, you do not need to
+compile anything.
+
+RUNNING:
+
+The first time you run nap, it will prompt you for some information
+and save this information to a configuration file for you. It will
+also build your "library", or a list of the files that you are
+sharing. The next time you start nap, it will only prompt you for
+missing information, and it will automatically update your library if
+it is out of date.
+
+If you get an error relating to the ncurses library, you will either
+have to upgrade your current version or install it.
+
+*Command Line Options*
+
+-h, --help             - print this help message
+-v, --version          - print version info and exit
+-b, --build            - build library of shared files to send to server
+-B, --build-only       - build library and exit
+-N, --nobuild          - do not build library, even if it is out of date
+-m, --create           - create new account on server (obsolete)
+-r, --reconnect        - keep reconnecting until server connection established
+-a, --autorestart      - automatically reconnect when connection to server lost
+-q, --daemon           - run without user interface; file sharing only
+-t, --notitle          - do not display title bar (fixes messed-up displays)
+-l, --nxterm           - try using a terminal which is compatible with most
+                         systems (fixes some messed-up displays)
+-T, --transparent      - use terminal's default background instead of black
+-n, --noserver         - start up without connecting to a server
+-f, --config fn        - config file to use (default $HOME/.nap/napconf)
+-x, --log fn           - log all transfers to a specific filename
+-g, --logall fn        - log everything to a specific filename
+-s, --server sv:port   - select a specific server (multiple -s opts possible)
+-d, --debug n          - set debug level
+-u, --user str         - specify napster username
+-p, --pass str         - specify user's password
+-e, --email str        - specify user's email address
+-U, --upload dir       - specify upload directory (multiple -U opts possible)
+-D, --download dir     - specify download directory
+-I, --incomplete dir   - specify directory for incomplete files
+-P, --dataport n-m     - specify port(s) to use for incoming upload requests
+-C, --connection n     - specify connection speed number (see README)
+-M, --maxuploads n     - specify maximum number of simultaneous uploads
+-o, --option var=value - set user variable
+
+CONNECTION SPEED CHART (-C option):
+
+ Connection | Number
+ -------------------
+ Unknown    |  0
+ 14.4       |  1
+ 28.8       |  2
+ 33.6       |  3
+ 56.7       |  4
+ 64K ISDN   |  5
+ 128K ISDN  |  6
+ Cable      |  7
+ DSL        |  8
+ T1         |  9
+ T3 or >    | 10
+
+IN CLIENT:
+
+Assuming you are familiar with ircii or BitchX or another UNIX IRC
+client, you should have no trouble figuring out this client. Here is a
+partial list of commands. For a full, up-to-date list, try /help, or
+see userguide.html.
+
+*Regular Commands*
+
+/help <command> - Returns help on the specified command.
+/join [chan] - Joins channel "chan".
+/part [chan] - Parts channel/query "chan", or if the 2nd argument is
+               omitted, the current channel/query.
+/quit - Exits the client.
+/tquit - Leaves the client running and exits it when all transfers have
+         finished.
+/disconnect - Disconnects you from the server.
+/reconnect - Reconnects you to the server.
+/tell <user> <message> - Sends a private message.
+/msg <user> <message> - An alias for /tell.
+/me <msg> - Performs an action with the message specified.
+/whois <user> - Returns information on the user you specify.
+/finger <user> - An alias for /whois.
+/g <numbers> - Attempt to get the file numbers which are returned with
+               /search. (ex. /g 60-63,31,75)
+/search <opts> <string> - Performs a search for a file matching "string".
+*Note* For ping times to be returned with /search, root privileges are
+       required.
+/browse <user> - Browses a user's files.
+/pup - Prints out a list of your current uploads.
+/dup <number> - Deletes the upload number "number" retrieved from /pup (Only
+                works if transfer hasn't started.)
+/pdown - Prints out a list of your current downloads.
+/ddown <number> - Deletes the download number "number" retrieved from
+                  /pdown.
+/dns <host/IP> - Attempts to resolve a hostname or IP.
+/clear - Clears your screen buffer.
+/ping <user> - Pings another user.
+/clist - Returns a listing of the current channels, the number of users and
+         the current topic.
+/clist2 - The same as /clist except that it returns user created channels as
+          well.
+/names [channel] - Returns the current userlist of your current channel or
+                   the channel you specify (you must be on the channel).
+/window - Allows you to open every channel/query in a seperate window, which
+          can be cycled through with Ctrl-X.
+/query <user> - Starts a private message conversation between you and
+                "user". Queries act like channels.
+/about - Returns some information about the client and "thank you"s.
+/ignore [user] - Attempts to ignore a user.
+/unignore <user> - Attempts to unignore a user.
+
+*Aliases*
+
+/alias <name> <alias> - Attempts to create an alias with the name specified.
+Special Alias Variables:
+$1 - Replaces all occurences of $1 in "alias" with the first argument given.
+$2 - Replaces all occurences of $2 in "alias" with the second argument given.
+...
+$1- - Replaces all occurences of $1- in "alias" with the first argument as
+      well as all following arguments.
+$2- - Replaces all occurences of $2- in "alias" with the second argument as
+      well as all following arguments.
+...
+/unalias <name> - Attempts to unalias the alias "name".
+/aliaslist - Returns a list of all created aliases.
+/loadalias <filename> - Attempts to load aliases from "filename".
+*Note* A file with the name ".nap_aliases" is automatically loaded
+       everytime the client is started.
+/savealias <filename> - Attempts to save aliases to "filename".
+
+*Navigation*
+
+Page Up/Meta-V - Scrolls the screen up 10 lines.
+Page Down/Ctrl-V - Scrolls the screen down 10 lines.
+Meta-Backspace/Meta-Delete - deletes the token before the cursor
+End - Returns to the bottom of the screen.
+Ctrl-X - Switches between current channels.
+Ctrl-L - Refresh the screen.
+Ctrl-B - Toggles bold (only compatible with this client as far as I know).
+Ctrl-T - Scrolls the topic.
+Ctrl-A/Ctrl-E - go the beginning/end of line
+Ctrl-D - delete character at cursor
+Ctrl-K - delete rest of line
+Tab - Attempts to autocomplete a command or username.
+ESC Char is equivalent to Meta-Char.
+
+COMMENTS:
+
+If you discover a bug, or have a question, comment or suggestion,
+please report them to the maintainer. The current maintainer is Peter
+Selinger, selinger@users.sourceforge.net.
+
+The newest version is at http://nap.sourceforge.net/.
+
+
+ORIGINAL AUTHOR:
+
+Kevin Sullivan
+Ignitor
+http://www.gis.net/~nite/
+nite@gis.net

@@ -1,0 +1,722 @@
+CHANGES:
+
+v1.5.4 2006/11/04
+	(2006/11/04) PS1 - use new default metaserver URL.
+	(2005/06/27) PS1 - fixed memory bug in dynstr.c:237.
+
+v1.5.3 2004/05/06
+	(2004/05/06) PS1 - use new default metaserver URL.
+	(2004/05/06) PS1 - send "\r\n" instead of "\n" to web servers.
+	(2003/06/21) PS1 - fixed bug #758320: segfault on terminal resize
+	in daemon mode.
+	(2003/06/21) PS1 - include config.h in defines.h
+	(2003/06/02) PS1 - removed unused include file dlfcn.h.
+	(2003/06/02) PS1 - To compile under OSX, added socklen_t
+	substitute to defines.h.
+	(2003/06/02) PS1 - To compile under gcc-3.1, removed 2 occurrences
+	of a label at the end of a block.
+	
+v1.5.2 2003/05/31
+	(2003/05/29) PS1 - removed multiline string constants to please
+	gcc-3.3.
+	(2003/02/08) PN1 - added forgotten fclose() in
+	library.c:read_library_file().
+	(2003/01/12) PS1 - added drw() call to /update, /rebuild.
+	(2002/12/12) PS1 - added timeouts to nap.c:makeact().
+	(2002/12/12) MDZ, PS1 - added user variable "identity" for setting
+	a fake client id string, for fooling servers that refuse
+	connections from nap clients. Usage e.g. -oidentity="WinMX 1.0".
+	(2002/12/10) PS1 - renamed F_* preprocessor variables to NAP_* to
+	avoid conflicts with fcntl.h.
+	
+v1.5.1 2002/12/09
+	(2002/12/09) PS1 - added --noserver option to enter nap
+	interactive mode without connecting to a server.
+	(2002/12/08) PS1 - tweaked autoconfiguration to compile "out of
+	the box" on solaris systems with ncurses. Also dropped autoconf
+	support for curses, since it never worked anyway.
+	(2002/12/08) PS1 - dropped obsolete scripts from distribution and
+	userguide.
+	(2002/12/08) PS1 - dropped sigpipe debug code in event.c:sfile().
+	(2002/12/08) PS1 - dropped support for "napster-style"
+	meta-servers in nap.c:conn(), since these no longer seem to
+	exist. Instead, if no port given, connect to port 8888 by default.
+	(2002/12/08) PS1 - added "nomasq" user variable; if set, it
+	prevents filename masquerading.
+	(2002/12/08) PS1 - implemented filename masquerading. Instead of
+	sending a full path name to the server, use something like
+	/1/localpath/filename. This prevents leaking information about our
+	shared path, such as our real username, to the world. New
+	functions library.c:masquerade and unmasquerade.
+	(2002/12/08) PS1 - moved ud_basename() from cmds.c to scmds.c, and
+	elmiminated unnecessary calls to it in snacc and sget.
+	(2002/12/07) PS1 - added USR1 signal to man page and userguide.
+	(2002/12/07) PS1 - added new /search options: -x for excluding a
+	keyword from the search, -d for limiting the duration in seconds,
+	and -t for specifying a filetype among audio, video, text, image,
+	application, mp3, or any.
+	(2002/12/07) PS1 - added man page, based on that written by MDZ.
+	(2002/12/07) PS1 - shared file list is now sent to the server in
+	the background.
+	(2002/12/07) PS1 - moved library handling code to a new source
+	file library.c
+	(2002/12/07) PS1 - turned off MD5 hashing by default. Since most
+	servers do not use the hash anyway, it is a waste of time to
+	compute them. Added a user variable "hash" which, if set, enables
+	hashing.
+	(2002/12/07) PS1 - added typecasts to match format strings ("%lu"
+	etc).
+	(2002/12/07) PS1 - added vasprintf to functions monitored by
+	memwatch.
+	(2002/12/07) PS1 - fixed checksum length to 300032 once and for
+	all, eliminating the 299008 possibility.
+	(2002/12/07) PS1 - changed library rebuilding code so it does not
+	re-read file stats that are already known. This can vastly speed
+	up "library building".
+	(2002/12/06) PS1 - moved sources to src directory
+	(2002/12/06) PS1 - fixed alias.c:loadsets() to allow arbitrary
+	line length in config file.
+	(2002/12/06) PS1 - event.c:gfile(): close socket as soon as
+	download completes, rather than waiting for the remote client.
+	(2002/12/06) PS1 - fixed memory bug in event.c:gfile() (task->lfn
+	was used after it was freed).
+	(2002/12/06) PS1 - replaced old cmds.c:upchan() function with new
+	functions nextchan() and delchan().
+	(2002/12/06) PS1 - added missing free() to
+	nap.c:set_defaults_interactive().
+	(2002/12/01) PS1 - changed getopt() behavior in cmds.c:dsearch()
+	to not permute arguments.
+	(2002/12/01) PS1 - added help messages for /conf, /reload, /sraw.
+	(2002/12/01) PS1 - fixed bug in cmds.c:parseout() where strcpy was
+	used for overlapping regions.
+	(2002/12/01) PS1 - fixed Slavanap 2.3.0 incompatibility: removed
+	whitespace at end of "search" command. Thanks to Michael Pritchard
+	for figuring out what the problem was.
+        (2002/08/28) PS1 - changed usage message for -s option to sv:port
+        (2002/06/02) PS1 - removed unused code from cmds.c and timer.c.
+        (2002/06/02) PS1 - fixed bug 552385, crash on some .ogg files.
+        (2002/06/02) PS1 - renamed getline() to nap_getline() to avoid
+	clash with the glibc function of the same name.
+	(2002/06/02) PS1 - Added files missing.c/missing.h to supply some
+	library functions if they are missing (including code from MVB).
+        (2002/06/02) PS1 - changed autoconf to use config.h file.
+        (2002/06/02) PS1 - Added autoconf tests for strcasestr and
+	vasprintf.
+        (2002/05/01) MVB - Fixed double quotes in /me command.
+	(2002/04/16) PS1 - replaced buggy function vmsprintf by equivalent
+	libc6 function vasprintf (fixes segfault on powerpc). Thanks to
+	MDZ for help with finding and fixing this bug.
+        (2002/04/15) MVB - Dropped MCURSES support. We (me and PS1) have
+	no idea what it was supposed to do.
+	(2002/03/30) PS1 - added autoconf tests for socklen_t and
+	hstrerror() to suit cygwin and older libc5 systems.
+	(2002/03/26) MVB - Created /unhotlist alias for /unnotify, for
+	consistency.
+        (2002/03/16) MVB - Documented /handler command a bit.
+        (2002/03/13) MVB - Set SO_KEEPALIVE on most sockets. We will now
+	get a timeout when a server or client silently disappears.
+        (Although it may take an hour or longer, depending on your TCP/IP
+	stack.)
+	(2002/03/05) RPB - changed order of #include files to be less
+	noisy on freebsd.
+	
+v1.5.0 2002/03/02
+	(2002/03/02) PS1 - if file can't be moved to download directory,
+	attempt to remove "incomplete" suffix anyway.
+	(2002/03/02) PS1 - added C-l, C-p, C-n, C-v keybindings to dlul
+	screen.
+	(2002/03/01) MDZ - fixed bug that sometimes caused creation of
+	.nap directory to fail - check return value of stat().
+	(2002/02/26) PS1 - changed message in dquit().
+	(2002/02/26) PS1 - added 'f' keybinding to dlul screen for force.
+	(2002/02/26) PS1 - added http proxy support. User variable "proxy"
+	holds proxy URL, e.g. http://proxy.mydomain.com/
+	(2002/02/26) PS1 - do not prompt user for password and email; just
+	make them up.
+	(2002/02/25) PS1 - Changed field names of search_t. Fixed "retry"
+	command not to allow duplicate downloads. Changed 'P' command to
+	act separately for uploads and downloads on dlul screen.
+	(2002/02/25) PS1 - fixed status line scrolling and command
+	history, added C-k and C-g key bindings, fixed non-printable
+	character handling in getline.c. Edited dlul status messages. Did
+	a -Wall cleanup. Fixed scrolling on dlul screen. Added 'o' and
+	'\n' key bindings on dlul screen.
+	(2002/02/24) PS1 - added error handling to dynamic string library,
+	fixed vsnprintf bug.
+	(2002/02/18) SMS - Generic modules dynstr.[ch] (growable strings)
+	and getline.[ch] (display-independent readline-like functionality,
+	uses dynstr) added
+	(2002/02/18) SMS - Status line code modularized into
+	status_line.[ch]; uses dynstr and getline
+	(2002/02/18) SMS - Status line now scrolls by screenfulls instead
+	of by character.
+	(2002/02/18) SMS - Added download/upload monitor screen: up/down
+	to scroll cursor, M-up and M-down to move between ul and dl
+	sections, 'd' to delete task under cursor, 'r' to retry download
+	under cursor, 'R' to retry all, 'P' to purgeup and purgedown.
+	(2002/02/18) SMS - Added ability to enter a new search directly
+	from results or dl/ul screen (type <space> to activate)
+	(2002/02/18) SMS - Added '/' command to results and dl/ul screens;
+	takes user back to the main screen and starts a new command
+	(2002/02/18) SMS - Expanded screen switching keybindings: F1-F3,
+	M-1 thru M-3, as well as <tab> to switch between the results and
+	dl/ul screens.
+	(2002/02/18) SMS - Status-line help text expanded to cover all new
+	keybindings
+	(2002/02/18) SMS - Added repeatable timed events (/repeat
+	[min:sec]
+	[cmd]) and a command to delete a timed event (/dtimer [num])
+	(2002/02/18) SMS - Fixed a bug in cmds.c:usage(). The strchr(help,
+	'-') test was twigging on dashes in the usage text (such as
+	"[-b>bitrate]").  Changed to search on strstr(help, " - ")
+	instead.
+	(2002/02/11) RPB - changed order of #include files to be less
+	noisy on freebsd.
+	(2002/02/11) SP1 - fixed a typo in the online help for "/search".
+	
+v1.4.9 2002/02/09
+	(2002/01/30) PS1 - reversed the change of 2002/01/24: it turns
+	out, the popular (but annoying) WinMX client does not conform to
+	the napster protocol and always claims its upload limit is 0, even
+	when it is not. Thus, we are forced to remotely queue the item
+	anyway, as much as we'd rather not.
+	
+v1.4.8 2002/01/28
+	(2002/01/28) PS1 - changed some occurrences of "fn" to "task->fn" 
+	in scmds.c:snget and such. Still probably need some more quotes.
+	(2002/01/28) PS1 - mapped "autorestart" command line option to a
+	user variable.
+	(2002/01/28) PS1 - feature request 503989: if there is already a
+	remotely queued item by a user, do not bother to reqeuest item;
+	rather, remotely queue it immediately. 
+	(2002/01/28) PS1 - better help message for /pdown [filter].
+	(2002/01/27) DSE - use new napigator meta-server, since the old
+	one went down. The new servers have a different URL and a
+	different format; also there are two of them. This patch can read
+	both the new and old formats, and it picks one of the two
+	meta-servers randomly.
+	(2002/01/24) PS1 - when receiving "queue limit" message from
+	remote client, but their upload limit is 0, don't bother "remotely
+	queueing" the message - just fail it immediately.
+	(2001/12/14) PS1 - added SIGUSR1 signal handler which causes nap
+	to reconnect to a server.
+	(2001/12/14) MC1 - fixed a bug (or rather, worked around an
+	ncurses bug?) where keys were not mapped properly after Ctrl-Z.
+	(2001/12/05) PS1 - modified /fup and /fdown command to finger only
+	once per user, if multiple up/downloads by the same user.
+	(2001/12/05) MC1 - added /fup and /fdown commands to finger a user
+	or range of users from the up- and download lists.
+	(2001/12/03) PS1 - fixed horizontal scrolling of status line in
+	search result screen.
+	(2001/11/30) PS1, MC1 - fixed bug in ogg sharing code which messed
+	up the shared library in some cases.
+	
+v1.4.7 2001/11/11
+	(2001/11/10) PS1 - fixed open_url to work with virtual hosts.
+	(2001/11/10) PS1 - changed the way news about new releases is
+	displayed during startup: there will now be an option "don't
+	prompt again".
+	(2001/11/10) PS1 - fixed display of current channel name which
+	used to show up too late. Fixed /part command to allow user to
+	omit leading '#' on channel names.
+	(2001/11/10) PS1 - changed the way -s flag is handled - this no
+	longer sets nometa explicitly.
+	(2001/11/10) PS1 - ignore SIGPIPE *before* connecting to server,
+	as some servers can cause a broken pipe.
+	(2001/11/10) PS1 - changed behavior of boolean user variables: now
+	any non-zero number is "true", and 0 and non-numbers are "false"
+	[previously, 1 = true, not 1 = false].
+	(2001/11/10) PS1 - added nvar_default call.
+	(2001/11/10) PS1 - fixed display of lastlog command.
+	(2001/11/10) PS1 - re-implemented main scroll in winio.c to be
+	more memory efficient. Also added scrollsize user variable to
+	limit the size of the main scroll; default is 10000
+	lines. Improved behavior of PgUp and PgDn keys.
+	(2001/11/09) PS1 - added autopurgeup and autopurgedown variables,
+	which work like autopurge, except for uploads and downloads
+	separately.
+	(2001/11/09) PS1 - improved timeout and interrupt while logging
+	into a server. There are some servers which will accept a
+	connection but then send no response to our login request. This
+	used to cause nap to hang.
+	(2001/11/08) PS1 - eliminated a segfault that resulted from a
+	double free() in checkhotlist.
+	(2001/11/08) PS1 - fixed bug where downloads would fail with
+	"Transport endpoint is not connected" in certain circumstances.
+	Replaced all fork/connect combinations with non-blocking
+	i/o. Thanks to Mike Castle for tracking down this bug.
+	(2001/11/05) PS1 - added support for sharing Ogg Vorbis files.
+	(2001/10/17) PS1, JJL - added ability to share non-music
+	files. Added "sharetypes" user variable which is a
+	semicolon-separated list of case-insensitive file name extensions
+	(example: "jpg:gif").  The value "*" is allowed as a special
+	"extension" to match all files. Files in the upload directory that
+	match the given extensions are shared, in *addition* to valid
+	mp3's. Mp3's are always shared and do not need to be listed in
+	sharetypes.  Also note that file sharing is decided at the time
+	the library is built, not at the time the file is requested. Thus,
+	changes to "sharetypes" do not take effect until the library is
+	rebuilt.
+	(2001/10/13) PS1 - fixed bug where foreign characters were not
+	escaped on browse result screen.
+	(2001/09/17) PS1 - fixed memory leaks: status in sscr.c; result of
+	form_toks in parseoutn; result of home_file in drebuild, dupdate,
+	setup_configdir, main, login, makeact, sfreq; result of glistn in
+	save_hotlist, dunnotify; result of getline in open_url,
+	set_defaults_interactive, checknv, icmpin, icmperr; result of
+	msprintf in ichat, login.
+	(2001/09/16) PS1 - added "memwatch" function in order to debug
+	memory leaks. This is only compiled in when the -DMEMWATCH option
+	is given to gcc.
+	(2001/09/16) PS1 - added key 'D' to sort by directory, rather than
+	by song name, on the search result screen.
+	(2001/09/16) PS1 - modified napping to output an empty line just
+	before quitting, for the benefit of cygwin, which can't apparently
+	detect the end of file.
+	(2001/08/31) PS1 - modified 'drop suid' code in napping.c to do it
+	precisely the same way it's done in ping(8).
+        (2001/08/30) RPB - made nap FreeBSD compatible. This requires
+	minimal changes in the inclusion of header files, and works on
+	FreeBSD 4.4-RC (and most likely 4.x and 5.x).
+	
+v1.4.6 2001/08/30
+	(2001/08/29) PS1 - fixed bug where remotely queued items were
+	periodically queued. Also, changed things so that we try at most
+	one remotely queued item of the same user at a time.
+	(2001/08/29) PS1 - added estimated time of arrival (e.g. 1h 25m
+	17s) to /pdown and /pup.
+	(2001/08/29) PS1 - added question about firewall to interactive
+	user setup.
+	(2001/08/29) PS1 - waiting for child process to exit after killing
+	it in connect_t - this hopefully solves a problem where sometimes,
+	a single "connection timed out" caused all subsequent connections
+	to time out immediately.
+	(2001/08/29) PS1 - fixed a bug where CTRL-C, when pressed while no
+	command was executing, would interrupt a later command.
+	(2001/08/29) PS1 - eliminated list of "standard servers", since
+	nap no longer works with these servers.
+	(2001/08/29) PS1 - added "napping" user variable to set an
+	alternative name and/or absolute pathname for the napping
+	application.
+	(2001/08/28) PS1 - added "noping" user variable which turns off
+	pings by default. Pinging can be toggled on and off by giving the
+	"-p" flag for the /search command.
+	(2001/08/28) PS1 - modified nap and napping to work together.
+	(2001/08/28) SZ1 - added separate program "napping" for getting
+	ping values. The point is that root privileges are needed for
+	opening a raw network socket for ping; but nap can't be made suid
+	(it would be unsafe). On the other hand, the separate napping
+	program can be safely made suid, because it drops root privileges
+	immediately after opening the socket.
+	(2001/08/28) PS1 - escape weird characters in filenames on search
+	result screen.
+	(2001/08/27) PS1 - added "--transparent" option which will cause
+	the terminal's default background to shine through instead of
+	painting it black. This will only look good if the default
+	background is dark.
+	(2001/08/26) PS1 - added global configuration file (default:
+	/etc/naprc) which is read *after* the user's configuration file
+	(however, values already set on the command line or in the user's
+	config file are not overwritten). The name of this file is given
+	by the user variable "globalconfig".
+	(2001/08/26) PS1 - made library filename configurable.
+	(2001/08/26) PS1 - rewrote library building code to avoid infinite
+	symlink loops.
+	(2001/08/26) PS1 - added connection() function which limits the
+	connection speed a user can claim when she has limited the upload
+	bandwidth.
+	(2001/08/26) PS1 - added configurable bandwidth limits.
+	(2001/08/26) PS1 - removed info.maxuploads, info.conn, and info.d
+	from nap.h. Added optional "numeric" hardwired lvalue to user
+	variables.
+	(2001/08/25) PS1 - changed interface of callback functions
+	(cur->func) in scheck.c:sockfunc. These functions now always
+	return 1; they must call delsock themselves.
+	(2001/08/25) PS1 - removed unused files exp.c and exp.h
+	(2001/08/25) PS1 - fixed plurals in status line
+	(2001/07/19) JP1 - patch #442669; check for a divide by 0 in VBR
+	length
+	(2001/07/17) SP1 - added a filter to /pdown command to selectively
+	list downloading, queued, failed, and successful items [d/q/f/s].
+	(2001/07/12) MDR - patch #440846; fixes broken Ctrl-W behavior,
+	which prevented multiple Ctrl-W keystrokes from deleting more than
+	one word.
+	(2001/07/12) MDR - patch #440842; causes Ctrl-L to redraw the
+	screen when viewing search results.
+	(2001/07/09) NBL - correctly print debugging output for packets of
+	length 0.
+	(2001/07/09) NBL - added support for direct browsing.
+	(2001/07/02) PS1 - corrected a bug that printed the dates
+	incorrectly in logallfile.
+	
+v1.4.5 2001/07/01
+        (2001/07/01) PS1 - got rid of usercmds.c	
+	(2001/07/01) PS1 - binary distributions are now statically
+	linked to avoid dependencies on specific shared library versions. 
+	(2001/06/30) PS1 - changed implementation of checknv().
+	(2001/06/30) PS1 - made OpenNap servers the default. Server list
+	will be read from napigator.com on startup. Added /getservers
+	command. Added "metaserver", "metatimeout", and "nometa" user
+	variables.
+	(2001/06/30) PS1 - close open socket after checking for news.
+	(2001/06/29) PS1 - now report full file name if file cannot be
+	opened in incomplete directory.
+	(2001/06/28) PS1 - changed default value of connecttimeout to 5
+	seconds. It can still be disabled by setting connecttimeout to 0.
+	(2001/06/28) PS1 - automatically rename .nap/nap.conf as
+	.nap/napconf, if the former file exists. This is to remove an
+	incompatibility with former debian distributions.
+	(2001/06/28) PS1 - added "announcepongs" user variable. If not
+	set, PONG packets will be silently ignored.
+	(2001/06/28) PS1 - renamed cmds.h:basename as ud_basename, to
+	avoid potential conflict with strings.h.
+	(2001/06/27) PAF - fixed a segfault during startup (while checking
+	for new releases).
+	(2001/06/08) MDR - fixed bug in firewall mode where upload state
+	was inadvertently left in state CONNECTING1. This caused ongoing
+	uploads to time out after 90 seconds.
+	(2001/06/02) PS1 - started removing arbitrary limits on length of
+	strings.
+	(2001/05/31) SP1 - contributed shell script for getting server
+	list from www.napigator.com, and an alias for reading it into nap.
+	(2001/05/30) PS1 - changed the syntax of the "incomplete tag" in
+	preparation of resumes.
+	(2001/05/30) PS1 - spun off scmds.c from cmds.c.
+	(2001/05/30) PS1 - added more comments to config file.
+	(2001/05/30) PS1 - added "cursorfollowsscreen" user variable to
+	configure behavior of "PgUp" and "PgDn" keys on search result
+	screen.
+	(2001/05/30) PS1 - allow CTRL-C to interrupt /reconnect command.
+	(2001/05/30) SP1, PS1 - changed /reconnect command to cycle to the
+	next server on the list, rather than start from the beginning of
+	the list.
+	(2001/05/30) PS1 - fixed a string allocation bug in dosend().
+	(2001/05/29) PS1 - added "sdefaults" user variable for
+	user-configurable default appearance of the search screen.
+	(2001/05/29) PS1 - made state of the search result screen
+	persistent while switching between screens.
+        (2001/05/29) PS1 - fixed bug where files could not be moved from
+	incomplete directory to download directory if these were on
+	different file systems.
+        (2001/05/24) NBL - improved VBR support to recognize Xing headers.
+        (2001/05/15) PS1 - allow ~/ notation in /loadconfig, /loadalias,
+	/loadchannels, /loadhandler, and similarly /saveconfig etc.
+	(2001/05/15) PS1 - changed /set, /alias, /ban, /block, /cban,
+	/join, /handler, /ignore, /notify, and /server commands to behave
+	like /pvars, /aliaslist, /banlist, /blocklist, /cbanlist, /clist2,
+	/handlerlist, /ignorelist, /hotlist, and /serv when no arguments
+	are given. This removes the need for the latter commands, but we
+	keep them for compatibility. Also, /set, /alias, and /handler will
+	print the current value when just one argument is given.
+        (2001/05/15) PS1 - removed duplicate "removed turd" message.
+        (2001/05/15) MG1 - fixed a bug in the command list which prevented
+	the /retryall command from working.
+	(2001/05/03) RK1 - fixed a segfault in mark_incomplete.
+        (2001/04/28) NBL - added support for VBR (variable bit rate).
+	(2001/04/27) PS1 - if no download path given, use $CWD by default
+	as announced (and not $HOME as in ps9).
+	(2001/04/27) PS1 - changed autoconf magic to link against ncurses
+	or curses, but not both.
+	(2001/04/27) PS1 - fixed appearance of horizontal and vertical
+	lines for cygwin32.
+	(2001/04/27) PS1 - replaced sys_errlist[] by strerror() for
+	cygwin32 and Solaris compatibility.
+	(2001/04/24) PS1 - eliminated ECANCELED for OpenBSD and cygwin32
+	compatibility.
+
+v1.4.4-ps9 2001/04/23
+	(2001/04/23) SL1 - 'm' on search screen now also toggles between
+	display in megabytes and bytes.
+	(2001/04/23) SL1 - added -s flag to /search command to limit file
+	size searched - this works on OpenNap servers and is ignored on
+	Napster.
+	(2001/04/23) PS1 - moved all nap config files under ~/.nap
+	directory; automatically move some old config files to their new
+	location automatically (for the next couple of releases).
+	(2001/04/22) MDZ - added sample nap-session script.
+	(2001/04/22) MDZ - added Debian info to userguide.html.
+	(2001/04/22) MDZ - fixed some potential sprintf buffer overflows.
+	(2001/04/22) MDZ - default upload, download, and incomplete
+	directory names relative to the home directory, and allow "~/"
+	syntax.
+	(2001/04/22) MDZ - include time.h in event.c
+	(2001/04/22) PS1 - removed non-functional /hup command.
+	(2001/04/22) PS1 - added feature to specify multiple passwords and
+	email addresses in config file.
+	(2001/04/22) PS1 - cleaned up hotlist code.
+	(2001/04/22) PS1 - fixed a bug where the incoming socket was not
+	deleted when a download was deleted, causing bytes to spill.
+	(2001/04/22) PS1 - added hook to request remotely queued item
+	immediately as soon as a download from that user ends.
+	(2001/04/22) PS1 - added /purgeup and /purge commands
+	(2001/04/22) PS1 - improved the output of some commands such as
+	/pvars.
+	(2001/04/22) PS1 - deleted some unused code
+	(2001/04/22) PS1 - overhauled upload state model to match the new
+	download state model.
+	(2001/04/21) PS1 - when download request times out because server
+	did not send ack, re-send the request rather than stopping the
+	download.
+	(2001/04/21) PS1 - fixed status line display to include queued
+	downloads
+        (2001/04/21) PS1 - disabled messages about "too many uploads",
+	unless variable "showtoomanyuploads" is set to 1.
+	(2001/04/21) PS1 - added "help" feature to search screen.
+	(2001/04/21) PS1 - added ability to "remotely queue" downloads if
+	the remote user's upload limit is reached. The way this is
+	implemented is by silently retrying the download every 15 seconds.
+	(2001/04/21) PS1 - allow numeric ranges in /get to be separated by
+	spaces or commas. Allow ranges in /ddown, /dup, /force.
+        (2001/04/21) PS1 - print usage message when command misused.
+	(2001/04/21) PS1 - made suffix ".incomplete" configurable
+	(2001/04/21) PS1 - added "autopurge" feature
+        (2001/04/21) PS1 - adjusted /tquit to wait for queued downloads as
+	well as ongoing ones. Added /unquit commands.
+        (2001/04/21) PS1 - major overhaul of download state model. We now
+	have proper queueing and global and per-user download limits.
+	Added /force command to start immediate download of queued item.
+        (2001/04/20) PS1 - made changes to gnum and addsock.
+	(2001/04/20) PS1 - reorganized wait for ping results using use
+	timers rather than a special copy of sockfunc().
+	(2001/04/20) PS1 - changed timer implementation to use arbitrary
+	callback functions.
+        (2001/04/20) PS1 - fixed a bug where recvpack did not always set
+	errno on error.
+        (2001/04/20) PS1 - added user variables "connecttimeout" and
+	"newstimeout" which specify how patient nap will be while
+	connecting to a server, and while looking for news about itself.
+	This can alleviate problems with non-responsive servers (because
+	after timing out, nap will move on to the next server on the
+	list).
+        (2001/04/20) PS1 - disallowed downloads from self on result screen
+	- such downloads led to a race condition.
+        (2001/04/19) PS1 - added sorting function to result screen.
+        (2001/04/19) PS1 - removed redundant "num" field from search
+	results.
+        (2001/04/19) PS1 - cleaned up screen switching code, removing some
+	segfaults along the way.
+        (2001/04/19) PS1 - redesigned command history in main screen
+        (2001/04/19) PS1 - removed dependency on endianness in sendpack
+	and recvpack.
+
+v1.4.4-ps8 2001/04/19
+        (2001/04/18) PS1 - improved debugging output
+	(2001/04/18) PS1 - make sure turds are removed on "/quit yes".
+        (2001/04/18) PS1 - made dynamically loaded user library support
+	optional - this is now disabled unless USERCMDS is defined
+        (2001/04/18) PV1 - in dynamically loaded user library code, prefix
+	symbols with "_" on a.out systems, but not on ELF ones.
+        (2001/04/17) PS1 - changed the checksum to include the size of the
+	mp3 data, rather than the file size. This conforms more closely to
+	what the official Napster clients do.
+	(2001/04/17) PS1 - fixed two segfaults - one when pressing Ctrl-T
+	while not on a channel, the other when window too narrow while on
+	a channel.
+	(2001/04/17) PS1 - fixed a cursor positioning bug.
+        (2001/04/17) PS1 - added "turdsize" variable. Any incomplete file
+	of up to this many bytes will be considered a "turd" and removed.
+        (2001/04/17) PS1 - added "incomplete" directory for files that are
+	downloading but not yet complete. Such files will also have the
+	suffix ".incomplete". The suffix is removed, and the file moved to
+	the "download" directory, only if it has been completed.
+        (2001/04/17) PS1 - added Makedist and rpm.spec.in to the
+	distribution.
+        (2001/04/16) PS1 - fixed a bug where the input field of the main
+	screen was not always redrawn after a command.
+
+v1.4.4-ps7 2001/04/16
+        (2001/04/15) PS1 - nap now checks online for new releases and
+	alerts the user to upgrade. This can be turned off with nonews=1.
+        (2001/04/15) PS1 - fixed the /tquit command - it now actually
+	works. Its effect can be undone with /reconnect.
+        (2001/04/15) PS1 - fixed up return values of user commands, and
+	removed some potential segfaults.
+        (2001/04/15) PS1 - do not create a download list entry if local
+	file cannot be opened.
+        (2001/04/15) PS1 - moved hotlist file to home directory.
+        (2001/04/14) PS1 - fixed Ctrl-C so that it can break a nested loop
+        (2001/04/14) PS1 - made /loadalias, /alias, and /unalias more
+	flexible. It is now possible to re-define an alias without first
+	deleting it, and /loadalias will no longer create duplicates.
+        (2001/04/14) PS1 - added "savepass" option, which, if set, causes
+	nap to store passwords in the config file.
+	(2001/04/13) PS1 - reorganized sources - spun off event.c from
+	nap.c
+        (2001/04/13) PS1 - added some keybindings to main window: Ctrl-A
+	and Ctrl-E for beginning and end of line, Ctrl-K for kill after
+	point, Ctrl-D for delete at point, Ctrl-N for PgDn, Ctrl-P for
+	PgUp, Meta-DEL for deleting word before point.
+        (2001/04/13) PS1 - fixed Ctrl-L (screen refresh) so that it really
+	redraws the entire screen from scratch.
+	(2001/04/13) PS1 - added a check to prevent duplicate uploads of
+	items already in the upload list.
+        (2001/04/13) PS1 - replace double quotes by single quotes when
+	chatting, since double quotes confuse napster
+        (2001/04/13) PS1 - the user variable "autoreply" can now be set to
+	a string which will be used as an automatic reply to messages from
+	remote users. This may be useful when running non-interactively.
+        (2001/04/13) PS1 - added --nobuild option to prevent building the
+	library.
+        (2001/04/13) PS1 - all user variables can now be set on the
+	command line with the --option option.
+        (2001/04/13) PS1 - fixed bug which prevented password from config
+	file from being be used.
+        (2001/04/13) PS1 - made IP address resolution independent of
+	endianness and word size.
+        (2001/04/12) PV1 - code cleanup; deleted some unused variables,
+	fixed #includes, as reported by -Wall.
+
+v1.4.4-ps6 2001/04/12
+        (2001/04/12) PS1 - fixed bug which prevented config file from
+	being created.
+
+v1.4.4-ps5 2001/04/12
+        (2001/04/12) PS1 - fixed an old bug which caused nap to freeze
+	sometimes when switching back and forth between main screen and
+	result screen with F1/F2.
+        (2001/04/11) NBL - fixed some bugs in optional queueing code.
+        (2001/04/11) PS1 - removed lists.c and fixed some bugs regarding
+	hotlists.
+        (2001/04/11) PS1 - added /loadchannels and /savechannels commands
+        (2001/04/11) PS1 - fixed bug which starved user input and server
+	during an upload
+        (2001/04/10) PS1 - changed library file format to allow nap to
+	automatically rebuild the library when necessary on startup.
+        (2001/04/10) PS1 - closed security loophole which allowed remote
+	clients to access non-shared files.
+        (2001/04/10) PS1 - better error messages for "newbie" errors -
+	suggest starting commands with "/", and using /help.
+        (2001/04/10) PS1 - unified the concepts of user variables, command
+	line options, and config file options. Create config file if none
+	exists.
+
+v1.4.4-ps4 2001/04/09
+        (2001/04/09) PS1 - fixed fatal bug in v1.4.4-ps3 which prevented
+	all uploads. Immediate bugfix release.
+	(2001/04/07) PS1 - started matching command line parameters with
+	user-settable variables.
+	(2001/04/07) PS1 - reorganized sources - spun off winio.c from nap.c
+        (2001/04/07) PS1 - improved resizing behavior of main and results
+	screens, fixing some segfaults along the way.
+        (2001/04/07) PS1 - automatically scroll to bottom on output
+	on main screen. This can be turned off by /set noscroll 1.
+        (2001/04/07) PS1 - added control over information that appears on
+	result screen: new keys 'a', 'b', 'l', 'm', 'f', 'u', 's', 'p'.
+	Also changed behavior of PgUp and PgDn keys.
+        (2001/04/07) PS1 - changed behavior of md5 hash to conform to 
+	that of other clients.
+        (2001/04/07) PS1 - fixed ID3 sharing bugs (#211841) - the ID3
+	header size was calculated incorrectly in some cases.
+
+v1.4.4-ps3 2001/04/04
+     	(2001/03/30) NBL - added functions that respond to 609 (0x261)
+	"accept failed" and 620 (0x26c) "queue limit reached" messages
+	from server. Currently also only accessible via preprocessor flag
+	QUEUE.
+	(2001/03/30) NBL - /pdown shows which clients are firewalled
+	(2001/03/30) NBL - additional error reporting, and additional
+	comments in code; reorganized packet codes
+	(2001/03/30) NBL - pressing 'u' on an item in the search results
+	screen will show nickname of user offering the item
+	(2001/03/30) NBL - fixed bug in numbering of results if "/set
+	noresultscreen 1"
+        (2001/03/30) NBL - fixed "percentage completed" calculation in
+	case of a "resume". It now shows the percentage of the total file.
+        (2001/03/30) NBL - added ability to queue downloads. Download only
+	one file per user at a time, but automatically start the next one
+	when one finishes. Also added /forceq command to deal with stuck
+	queue items. (Experimental - define preprocessor flag QUEUE to
+	include this patch).
+        (2001/03/30) NBL - fixed ID3 download bug
+        (2001/04/03) PS1 - removed static up/download limits
+        (2001/04/02) PS1 - renamed "maxusers" as "maxuploads"
+        (2001/03/28) PS1 - added User Guide
+        (2001/03/27) PS1 - added RPM distribution
+	(2001/03/26) PS1 - experimental list macros
+	(2001/03/26) PS1 - disallow concurrent uploads of same file by
+	same user. This was the cause of unexpected segfaults.
+	(2001/03/26) PS1 - close some files that were left open
+	
+v1.4.4-ps-2 2001/03/24
+	(2001/03/12) GT1 - OpenBSD patches: updated getopt, made configure
+	check for curses, and include <netinet/in.h> under OpenBSD. Nap
+	should now compile "out of the box" on OpenBSD.
+
+v1.4.4-ps-1 2001/02/28
+	(2001/02/28) PS1 - problem: if the specified port is busy, nap
+	goes into firewall mode.  fix: allow user to specify a port range,
+	rather than just a single port. By default, use ports 6699-6799.
+	(2001/02/27) PS1 - fixed bug #214363: /d command takes (n-x)
+	instead of x as arg
+	(2001/02/27) PS1 - fixed bug #215003, single file can't be
+	downloaded by hitting return
+	(2001/02/26) PS1 - applied modified patch #401946 by Ville Aikas:
+	fix bug #116254, segmentation fault
+	(2001/02/26) PS1 - applied modified patch #403468 by christoph
+	hebeisen: use 32-bit integer type for host addresses (improved:
+	use configure script to figure out which type to use)
+	(2001/02/26) PS1 - applied modified patch #403480 by Anonymous:
+	display total count of mp3's in search or browse screen
+	(2001/02/26) PS1 - fixed null pointer bug in nap.c
+
+v1.4.4-ps-0 2001/02/24
+	(2001/02/24) PS1 - renamed config file to .napconf, since .naprc
+	was already taken.
+	(2001/02/24) PS1 - fixed bug in config file handling: now only
+	complain about non-existing file if the filename was explicitly
+	given
+	(2001/01/28) PS1 - fixed many memory leaks in nap.c, coming from
+	excessive use of malloc for character arrays. Replaced these by
+	stack-allocated arrays where possible.
+	(2001/01/28) PS1 - fixed bug where uploads and downloads were
+	deleted by their username and filename fields: this sometimes
+	caused the wrong one to be deleted if some user requested two
+	copies of the same file, resulting in a segmentation fault.
+	(2001/01/28) PS1 - fixed several instances where members of a
+	struct were accessed after the struct was free()d.
+	(2001/01/27) PS1 - added the ability to give multiple --server
+	options, and remember servers given for later /reconnect
+	commands. Also, if more than one server is given, we go through
+	the list in trying to connect, even if no -r option is given. The
+	-r option then causes us to cycle back to the beginning of the
+	list (leading to an infinite loop).
+	(2001/01/27) PS1 - added an --autorestart option which
+	automatically reconnects to a server when the connection was
+	lost. This is useful when running in --daemon mode, since the
+	Napster server usually disconnects after a day or so.
+	(2001/01/27) PS1 - Print IP address and port of server whenever a
+	connection to a server is established. This is useful for
+	debugging in --daemon mode, since we can log this info to a
+	file. We can then log into the same server and try to establish a
+	connection to the client being debugged.
+	(2001/01/20) PS1 - added POSIX-style long options.
+	(2001/01/20) PS1 - added --version option to check version of nap
+	without running it.
+	(2001/01/20) PS1 - added --daemon option to run quietly without
+	user interface. This will allow users to share their files by
+	running nap in the background as a "nohup" process.
+	(2001/01/20) PS1 - look for config and library files in user's
+	home directory, rather than current directory. Also, renamed these
+	files more discreetly as .naprc and .nap_shared.
+	(2001/01/20) PS1 - improved certain error messages by printing
+	more specific information.
+	(2001/01/20) PS1 - added --user, --pass, --email, --upload,
+	--download, --dataport, --connection, --maxusers options to
+	override settings in config file.
+	(2001/01/20) PS1 - handle missing config file or missing values by
+	prompting user or guessing a default, rather than by giving up.
+	(2001/01/20) PS1 - allow more flexible format for config file:
+	allow blank lines, and whitespace at beginning and end of line,
+	and before and after '='.  Do not quit on ill-formed lines.
+	(2001/01/20) PS1 - fixed a security bug (string format attack):
+	calls to sendpack(a, b, c), where c is not a constant string, must
+	be replaced by sendpack(a, b, "%s", c).  This is because in some
+	contexts, c may contain arbitrary data (such as filenames), and by
+	embedding '%' characters in c, a cracker could gain access to any
+	data on this process's evaluation stack, including passwords
+	etc. I found this bug in a posting by gregory duchemin
+	<c3rb3r@HOTMAIL.COM> to BUGTRAQ@SECURITYFOCUS.COM, archived at
+	http://www.shmoo.com/mail/bugtraq/sep00/msg00942.shtml.
+
+v1.4.4 2000/09/08
+	no ChangeLog available past this point.

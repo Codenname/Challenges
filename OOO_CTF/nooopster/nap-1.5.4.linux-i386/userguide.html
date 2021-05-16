@@ -1,0 +1,2192 @@
+<!-- $Id: userguide.html,v 1.47 2004/05/06 06:52:44 selinger Exp $ -->
+
+<title>Linux Napster Client: User Guide</title>
+
+<body bgcolor=#ffffff>
+
+<h1>Linux Napster Client: User Guide</h1>
+
+<h2>Peter Selinger (selinger@users.sourceforge.net)</h2>
+
+<p>
+
+Created March 28, 2001. Updated November 4, 2006 for nap version 1.5.4.
+
+<p>
+
+<hr>
+<i>This document describes the linux napster client "nap". It
+covers basic installation, configuration, and usage, as well as some
+finer points.</i>
+<hr>
+
+<h2>1. <a href=#1.>General</a></h2>
+<ul>
+<li><a href=#1.1.>1.1. Introduction</a>
+<li><a href=#1.2.>1.2. Brief history</a>
+<li><a href=#1.3.>1.3. Reporting bugs</a>
+</ul>
+<h2>2. <a href=#2.>Author and copyright</a></h2>
+<h2>3. <a href=#3.>Downloading and installation</a></h2>
+<ul>
+<li><a href=#3.1.>3.1. Source distribution</a>
+<li><a href=#3.2.>3.2. Linux precompiled distribution</a>
+<li><a href=#3.3.>3.3. RPM package</a>
+<li><a href=#3.4.>3.4. Debian package</a>
+<li><a href=#3.5.>3.5. OpenBSD package</a>
+<li><a href=#3.6.>3.6. Windows precompiled distribution</a>
+<li><a href=#3.7.>3.7. Binary distributions with ncurses</a>
+<font size=3 color=#00ff00><b>[new 1.5.1]</b></font>
+<li><a href=#3.8.>3.8. Other formats</a>
+<li><a href=#3.9.>3.9. "What if I don't have root privileges on my machine?"</a>
+</ul>
+<h2>4. <a href=#4.>Basic nap usage</a></h2>
+<ul>
+<li><a href=#4.1.>4.1 Starting nap</a>
+<li><a href=#4.2.>4.2. Simple searches and downloads</a>
+<li><a href=#4.3.>4.3. The download/upload screen</a>
+<li><a href=#4.4.>4.4. Browsing another user's files</a>
+<li><a href=#4.5.>4.5. Where your music files go</a>
+<li><a href=#4.6.>4.6. Navigating the main screen</a>
+<li><a href=#4.7.>4.7. Quitting nap</a>
+<li><a href=#4.8.>4.8. Napster vs. OpenNap</a>
+<li><a href=#4.9.>4.9. News about new releases</a>
+<li><a href=#4.10.>4.10. If you are behind a firewall</a>
+</ul>
+<h2>5. <a href=#5.>More on searching and downloading</a></h2>
+<ul>
+<li><a href=#5.1.>5.1. Advanced searches</a>
+<font size=3 color=#00ff00><b>[updated 1.5.1]</b></font>
+<li><a href=#5.2.>5.2. Pings</a>
+<li><a href=#5.3.>5.3. Advanced navigation of the search result screen</a>
+<li><a href=#5.4.>5.4. Shortcut searches</a>
+<li><a href=#5.5.>5.5. Incomplete downloads and turds</a>
+<li><a href=#5.6.>5.6. Upload and download limits and queueing</a>
+<li><a href=#5.7.>5.7. Purging and retrying failed items</a>
+<li><a href=#5.8.>5.8. Limiting bandwidth</a>
+<li><a href=#5.9.>5.9. Direct browsing</a>
+<li><a href=#5.10.>5.10. Sharing non-music files</a>
+<li><a href=#5.11.>5.11. Managing uploads and downloads from the main screen</a>
+</ul>
+<h2>6. <a href=#6.>Messages, channels, and hotlists</a></h2>
+<ul>
+<li><a href=#6.1.>6.1. Private messages</a>
+<li><a href=#6.2.>6.2. Napster channels</a>
+<li><a href=#6.3.>6.3. Creating your own channel</a>
+<li><a href=#6.4.>6.4. IRC channels</a>
+<li><a href=#6.5.>6.5. The hotlist</a>
+</ul>
+<h2>7. <a href=#7.>Configuration and user variables</a></h2>
+<ul>
+<li><a href=#7.1.>7.1. The configuration files</a>
+<li><a href=#7.2.>7.2. User variables</a>
+<font size=3 color=#ff0000><b>[updated 1.5.2]</b></font>
+<li><a href=#7.3.>7.3. Meta-servers</a>
+<font size=3 color=#ff0000><b>[updated 1.5.3]</b></font>
+<li><a href=#7.4.>7.4. Http proxies</a>
+<li><a href=#7.5.>7.5. Building your library</a>
+<li><a href=#7.6.>7.6. "Some files in my upload directory don't show up on napster."</a>
+</ul>
+<h2>8. <a href=#8.>Advanced features</a></h2>
+<ul>
+<li><a href=#8.1.>8.1. User defined commands and handlers</a>
+<li><a href=#8.2.>8.2. Daemon mode</a>
+<li><a href=#8.3.>8.3. Running nap as a nohup process</a>
+</ul>
+<h2>9. <a href=#9.>Obsolete features</a></h2>
+<ul>
+<li><a href=#9.1.>9.1. Creating a new napster account</a>
+</ul>
+<h2>10. <a href=#10.>Summary of command line options</a> <font size=3 color=#00ff00><b>[updated 1.5.1]</b></font></h2>
+<h2>11. <a href=#11.>Summary of nap commands</a></h2>
+
+<hr>
+
+<!---------------------------------------------------------------------->
+<h2><a name=1.></a>1. General</h2>
+
+<h4><a name=1.1.></a>1.1. Introduction</h4>
+
+<b>Nap</b> is a console napster client for linux and other operating
+systems, written by Kevin Sullivan. This user guide summarizes some of
+its most important features, from a user's point of view. Additions
+and corrections are welcome.
+
+<h4><a name=1.2.></a>1.2. Brief history</h4>
+
+Nap, written by Kevin Sullivan sometime in 1999, was one of the first
+napster clients besides Shawn Fanning's original Windows client. It
+was also the first client that ran on Linux.  Kevin learned much about
+the inner workings of the napster protocol by collaborating with
+Jordan Ritter, who was one of the co-founders of Napster and its chief
+server architect at the time.
+
+<p>
+
+After a period of inactivity, development of nap resumed in early
+2001, when I took over the project. Since then, nap has been polished,
+and many new features have been added, while the original "look and
+feel" has been preserved as much as possible. Today, nap is one of the
+most reliable and stable napster clients. Nap has been packaged for a
+variety of popular platforms, and it is shipped with distributions of
+some operating systems such as Debian Linux and OpenBSD.
+
+<h4><a name=1.3.></a>1.3. Reporting bugs</h4>
+
+Nap has a <a href=https://sourceforge.net/projects/nap/>sourceforge
+project page</a>. You are encouraged to use sourceforge's facilities
+for bug reports, feature requests etc. You can also send me bug
+reports by email. When you report a bug, please be as specific as you
+can about what happened and what you were doing when the bug occurred.
+
+<!---------------------------------------------------------------------->
+<h2><a name=2.></a>2. Author and copyright</h2>
+
+This user guide can be freely copied, modified, and distributed
+under the <a href="http://www.gnu.org/copyleft/gpl.html">GNU public
+license</a>.
+
+<p>
+
+The nap software is copyrighted by Kevin Sullivan, under conditions set
+forth in the file <a href=COPYRIGHT>COPYRIGHT</a>.
+
+<!---------------------------------------------------------------------->
+<h2><a name=3.></a>3. Downloading and installation</h2>
+
+The current release of nap is available from 
+<a href="http://nap.sourceforge.net/">
+http://nap.sourceforge.net/</a>.
+You can download nap in one of several formats. In the following,
+<code>XXX</code> stands for a version number.
+
+<h4><a name=3.1.></a>3.1. Source distribution</h4>
+
+This is the most complete distribution of nap, since it contains all
+the source code necessary to compile nap. On the other hand, this
+means you have to compile it yourself. This is not very difficult, but
+if nap is available in precompiled form for your platform, you might
+find that easier.
+
+<p>
+
+Instructions: download the file <code>nap-XXX.tar.gz</code>. The
+following sequence of commands should compile and install nap.
+<p><pre>
+        tar -zxf nap-XXX.tar.gz
+        cd nap-XXX
+        ./configure
+        make
+        su
+        (type root password)
+	make install
+</pre>
+
+<h4><a name=3.2.></a>3.2. Linux precompiled distribution</h4>
+
+Instructions: download the file <code>nap-XXX.linux-i386.tar.gz</code>.
+Install nap as follows:
+<p><pre>
+        tar -zxf nap-XXX.linux-i386.tar.gz
+        cd nap-XXX.linux-i386
+	su
+	(type root password)
+	cp nap napping /usr/local/bin
+	chmod 0755 /usr/local/bin/nap
+	chmod 4755 /usr/local/bin/napping
+</pre>
+If you are running Linux on a different architecture, such as Alpha, just 
+substitute "alpha" for "i386" in the above instructions.
+
+<p>
+
+Napping is a helper application for nap which can be safely installed
+suid (with permissions 4755). For more on napping, see <a
+href=#5.2.>5.2. Pings</a>.
+
+<h4><a name=3.3.></a>3.3. RPM package</h4>
+
+RPM is the Redhat Package Manager. It allows for easy installation of
+packages on Redhat Linux systems, and on other systems where it is
+available.
+
+Instructions: download the file <code>nap-XXX.i386.rpm</code>. 
+As root, install nap with the single command
+<p><pre>
+        rpm -ivh nap-XXX.i386.rpm
+</pre>
+
+<h4><a name=3.4.></a>3.4. Debian package</h4>
+
+A nap package is distributed with the next relase (2.3) of
+<a href="http://www.debian.org/">Debian</a>. To install nap on a
+properly configured Debian system you should use the "apt-get" command:
+<p><pre>
+        apt-get install nap
+</pre>
+Alternatively you can download the latest <code>nap_XXX.deb</code>
+package from the Debian 
+<a href="http://packages.debian.org/unstable/net/nap.html">nap page</a>
+and install it manually with the "dpkg" command:
+<p><pre>
+        dpkg -i nap_XXX.deb
+</pre>
+
+You must be root to do this. If you are not root, read section
+<a href=#3.9.>3.9</a>.
+
+<h4><a name=3.5.></a>3.5. OpenBSD package</h4>
+
+Instructions: download the file <code>nap-XXX.tgz</code>. 
+Install it with the single command
+<p><pre>
+        pkg_add nap-XXX.tgz
+</pre>
+Note: this file is an OpenBSD Package, not a regular tar archive. It
+should be installed with "pkg_add".  If you unpack it with "tar", do
+it in an empty directory, as it will spill some files into the current
+working directory. If you do unpack this as a tar file, you will find
+an executable binary in the "bin" subdirectory.
+
+<h4><a name=3.6.></a>3.6. Windows precompiled distribution</h4>
+
+Instructions: download the file <code>nap-XXX.cygwin32.zip</code>.
+Unpack it with
+<p><pre>
+        pkunzip nap-XXX.cygwin32.zip
+</pre>
+(Note: pkunzip is a relatively dumb program. My version of it, which
+came with Windows 98, does not understand long filenames, and you may
+have to type something of the form "pkunzip nap-1.~1.zip". Instead of
+creating a directory, it may decide to dump the files in the current
+working directory, and it may rename them. Use "unzip" instead of
+"pkunzip" if it is available.) Among the unpacked files, you will find
+an executable file nap.exe and two DLL's (dynamically linked
+libraries): cygncurses5.dll and cygwin1.dll.  You need to put these
+DLL's in a place where Windows can find them, before running
+nap.exe. One way to do this is to copy the two "*.dll" files to a
+location (such as C:\WINDOWS) where Windows looks for DLL's. Another
+way is to amend your PATH environment variable, by adding something
+like the following line to C:\AUTOEXEC.BAT: 
+<p><pre>
+        PATH=%PATH%;C:\DIRECTORY\WHERE\DLLS\ARE
+</pre>
+
+Special care is needed with nap for Windows regarding the location of
+the configuration files.  Nap normally looks for its configuration
+files in a directory called ".nap" in the user's home directory. Under
+Windows, there is no such thing as a user's home directory, and nap
+will by default look for the .nap directory in the <i>current working
+directory</i>. You can change this behavior by defining an environment
+variable HOME. I do this by something like the line
+<p><pre>
+        set HOME=C:\SOME\DIRECTORY
+</pre>
+in the file C:\AUTOEXEC.BAT. This will cause nap to look for (and
+create) its configuration files in the directory
+C:\SOME\DIRECTORY\.nap.
+
+<p>
+
+See also the file README.win which comes with the distribution.
+
+<h4><a name=3.7.></a>3.7. Binary distributions with ncurses <font size=3 color=#00ff00><b>[new 1.5.1]</b></font></h4>
+
+Some binary distributions for operating systems which do not normally
+ship with the ncurses library, such as Solaris, come with a file
+<code>ncurses.so.5</code> or similar. If nap complains that it cannot
+find this file, you need to put it somewhere where the dynamic linker
+can find it. You need to do one of two things:
+
+<ul>
+
+<li>put the file <code>ncurses.so.5</code> in a standard directory
+where dynamically linked libraries are kept, typically
+<code>/usr/lib</code> or <code>/usr/local/lib</code>, or
+
+<li> set the <code>LD_LIBRARY_PATH</code> environment variable to
+contain a path to the directory which contains the
+<code>ncurses.so.5</code> file. Suppose the file
+<code>ncurses.so.5</code> is in a directory <i>path</i>. Then you need
+to issue one of the following two commands, depending on the
+shell that you use:
+<p><pre>
+   export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:<i>path</i>"  (for sh and bash)
+   setenv LD_LIBRARY_PATH "$LD_LIBRARY_PATH:<i>path</i>"  (for csh and tcsh)
+</pre>
+Note that this must be done every time you run nap. You might want to put
+the above lines in your <code>.bashrc</code> or <code>.tcshrc</code> file.
+</ul>
+
+Important: the ncurses.so.5 file distributed with nap assumes that
+your <code>terminfo</code> database is located at
+<code>/usr/share/lib/terminfo</code>. If it is in a different
+location, you must set the <code>TERMINFO</code> environment variable
+to the location, e.g.
+<p><pre>
+   export TERMINFO=/usr/share/terminfo
+</pre>
+
+<h4><a name=3.8.></a>3.8. Other formats</h4>
+
+Nap may be available in other formats, for instance in precompiled
+form for other operating systems. Something similar to the above
+instructions should work.
+
+<h4><a name=3.9.></a>3.9. "What if I don't have root privileges on my machine?"</h4>
+
+Don't worry. It is not really necessary to install nap in
+<code>/usr/local/bin</code>; you can install it anywhere you like.
+All that is really necessary is that the <code>nap</code> binary is
+somewhere in your <code>PATH</code>. The recommended steps are as
+follows:
+
+<p>
+
+1. create a directory <code>bin</code> in your home directory, and
+move the file <code>nap</code> there.
+<p><pre>
+        mkdir $HOME/bin
+	mv nap $HOME/bin
+</pre>
+2. If the shell you are using is <code>sh</code> or <code>bash</code>,
+put the following lines in the file <code>.bashrc</code> in your home
+directory:
+<p><pre>
+        PATH=$PATH:$HOME/bin
+	export PATH
+</pre>
+If the shell you are using is <code>tcsh</code>, put the following
+line in the file <code>.tcshrc</code> in your home directory:
+<p><pre>
+        setenv PATH ${PATH}:$HOME/bin
+</pre>
+3. Restart the shell. You should now be able to invoke nap by typing
+<code>nap</code>.
+
+<!---------------------------------------------------------------------->
+<h2><a name=4.></a>4. Basic nap usage</h2>
+
+This section gives a brief overview of the most important features of
+nap, particulary how to search and download files, and how to navigate
+nap's three screens. This should be enough to get you started. Later
+sections of this userguide will cover these and other features in more
+detail.
+
+<h4><a name=4.1.></a>4.1 Starting nap</h4>
+
+Congratulations, you have installed nap, and you are ready to give it
+a try. Simply invoke nap by typing
+<p><pre>
+        nap
+</pre>
+You will be prompted for any necessary information, and you will be
+asked whether you want to save the information in a configuration
+file. It is a good idea to answer yes [y]. Eventually you will see
+nap's main screen, which looks more or less like this:
+
+<p><table><tr><td bgcolor=#000000><pre><font color=#8080ff
+>                                                                  [nap v1.5.2] 
+<font color=#ffffff>
+     _.-------._
+    |\          /|
+   /| \_.----._/ |\                                  __
+  .$:            :$.    _____  ____   _____  _____  / /__ ___   ____
+ |$$:  ___  ___  :$$|  / __  // _  `// _   //  ___//  __// _ \ / ___/
+  "$: \___\/___/ :$"  / / / // /_/ // /_/ /(__   )/  /_ /  __// /
+    |     __     |   /_/ /_/ \__,_// ____//_____/ \___/ \___//_/mG!
+    `.    \/    .'                /_/
+      `. .__, .'
+        `----'
+<font color=#ffff00>
+* This is the main screen of nap.
+*
+* In this space, you will usually see some welcome messages from your 
+* Napster server.
+*
+* In the upper right corner, you see the version number of nap.
+* The blue line below is called the status line.
+* It displays the user name, and some other information. In the right part
+* of the status line, you see the number of current uploads, downloads,
+* and queued downloads.<font color=#8080ff>
+ [username] [474042 songs in 8066 libraries (1954 gigs)]         [U/0 D/0 Q/0] 
+</pre></td></tr></table>
+<p>
+
+The very last line, after the status line, has a cursor. This is where
+you can enter commands. All commands start with a slash "/"; if you
+forget the slash, nap will complain that you are "not on a channel".
+But more about that later.
+
+<h4><a name=4.2.></a>4.2. Simple searches and downloads</h4>
+
+To perform a search, you use the <code>/search</code> command. For
+instance, if you want to search for a song called "Yucky green goo", 
+you type
+<p><pre>
+        /search yucky
+</pre>
+This will cause nap to search for files that contain the word
+"Yucky". Napster queries are case insensitive, so it doesn't matter if
+you search for "yucky" or "Yucky". If fact, napster is generally very
+tolerant regarding search queries.
+
+<p>
+
+After a few moments, another screen will pop up with the search
+results. This is called the result screen. It might look as follows:
+
+<p><table><tr><td bgcolor=#000000><pre><font color=#ffffff
+>Filename (total = 14)                    | BRate       | Length       | Conn
+-----------------------------------------|-------------|--------------|---------<font color=#8080ff>
+1) Bobby Bones - Yucky.mp3               | 64          | 3:24         | T3<font color=#ffffff>
+2) HOT 5- [07]Time Will Tell.mp3         | 128         | 2:12         | T3  
+3) WB theme songs - Jack and Jill .mp3   | 128         | 3:00         | Cable
+4) Korean Rap-YG family - 1tym attack.mp | 128         | 3:35         | 56k
+5) Felicity THEME season 3 (New version  | 128         | 0:53         | 56k
+6) Passions theme.mp3                    | 128         | 2:24         | 33.6
+7) Korean - Uptown(03)- Han Oh Baek Nyun | 128         | 4:25         | 28.8
+8) BB Mack  - Back Here.mp3              | 192         | 3:40         | 28.8
+9) Cher_with_Peter_Cetera-After_All.mp3  | 128         | 4:04         | 28.8
+10) Gob- Paint it Black.mp3              | 160         | 1:49         | 28.8
+11) 3lw (Three Little Women) - NO MORE3. | 192         | 4:26         | 28.8
+12) kpop-CLICK B-EXIT.mp3                | 128         | 4:21         | 14.4
+13) Duets - Gwyneth Paltrow & Huey Le wi | 192         | 4:51         | 14.4
+14) Dawson's Creek 2 Soundtrack - Shawn  | 128         | 4:38         | Unknown
+                                         |             |              |
+                                         |             |              |
+                                         |             |              |
+                                         |             |              |
+                                         |             |              |
+                                         |             |              |
+                                         |             |              |<font color=#ff0000>
+1:\1\Mp3\Bobby Bones - Yucky.mp3</pre></td></tr></table>
+
+<p>
+
+Note that not all files listed actually contain the word "yucky". For
+instance, some of them might be found in a directory named "yucky",
+but the directory name is not displayed in the results list.
+
+<p>
+
+The files are listed in decreasing order of connection speed (or, if
+available, in increasing order of ping response). On the result
+screen, you can move up and down with the respective arrow keys, or
+you can move faster with the "PgUp" and "PgDn" keys. The red line at
+the bottom displays the full filename of the song currently selected;
+if it does not fit on the screen, you can scroll it from side to side
+with the left and right arrow keys. If you press "h", a help message
+is displayed at the bottom of the screen, which can also be scrolled
+via the left and right arrow keys.
+
+<p>
+
+You can hit "return" for any song you wish to download. Note: do not
+use nap to download or distribute any copyrighted material.
+
+<h4><a name=4.3.></a>4.3. The download/upload screen</h4>
+
+If you press "tab" while viewing search results, you will be taken to a
+third screen which displays all current downloads and uploads in a
+split-screen format (downloads above, uploads below), and their
+progress. Typically, this screen might look as follows:
+
+<p><table><tr><td bgcolor=#000000><pre><font color=#8080ff
+>                                 Downloads (7)</font><font color=#ffffff>
+ 1. Bobby Bones - Yucky.mp3                    | user77     | *Complete*
+ 2. Leo the Lion - Roaring On.mp3              | nickomat   | 55% (27.50 k/s)
+ 3. Savage Girls - Dig Your Well.ogg           | nickomat   | Queued
+ 4. Savage Girls - Gallow Song.ogg             | nickomat   | Waiting
+ 5. Savage Girls - Ghostly Night.ogg           | nickomat   | Waiting
+ 6. The Yucky Family - My Brother.mp3          | superguy   | Connecting
+ 7. Knots and Bones - Knotted.mp3              | 5668hello  | Failed
+
+
+<font color=#8080ff>                                  Uploads (5)</font>
+ 1. Cloned Sheep - Baah.mp3                    | macky      | 13% (0.53 k/s)
+ 2. Fried Thunder - Yesterday Morning.ogg      | sonicman   | Interrupted
+ 3. Fried Thunder - The Angel.ogg              | sonicman   | *Complete*
+ 4. Sunny Days - Happy again.mp3               | sonicman   | 77% (18.40 k/s)
+ 5. Sunny Days - Me and the sun.mp3            | sonicman   | 94% (22.53 k/s)
+
+
+
+
+
+
+<font color=#ff0000>Use F1 or 'q' to return to the main screen. 'h' for help.</font>
+</pre></td></tr></table>
+
+<p>
+
+You can scroll through the tasks via the up and down arrow
+keys, or "PgUp" and "PgDn". You can switch between the download and
+upload sections by pressing 'o', or "Alt-up" and "Alt-down". There are
+a number of keystrokes available to manipulate the displayed tasks:
+'d' to delete the task under the cursor, 'r' to retry a
+failed/incomplete download, 'R' to retry all failed tasks, 'f' to
+force an immediate download, and 'P' to purge stopped tasks from the
+current section. You can also type 'h' for help and left/right to
+scroll help, as on the results screen.
+
+<p>
+
+Press "tab" to go back to search results, or type "q" from either
+screen to return to the main screen. You can also switch between the
+three screens (main screen, search result screen, download/upload
+screen) by using the function keys "F1" thru "F3", or "Alt-1" thru
+"Alt-3".  
+
+<h4><a name=4.4.></a>4.4. Browsing another user's files</h4>
+
+Browsing works almost exactly like searching. Just type
+<p><pre>
+        /browse <i>user</i>
+</pre>
+and that user's files will appear on the result screen. If the remote
+user's client supports it, you can also directly browse that user's
+files, without going via the napster server. To do this, use the
+command <code>/browse2</code> instead of <code>/browse</code>. This
+can be useful if the server limits the number of browse results that
+you can see. See also <a href=#5.9.>5.9. Direct browsing</a>.
+
+<h4><a name=4.5.></a>4.5. Where your music files go</h4>
+
+When you start nap for the first time, it prompts you to enter three
+directories: Your "upload", "download" and "incomplete" directories. 
+
+<p>
+
+The "upload" directory contains files that you want to share. Do not
+use nap to share any copyrighted material.  Files that are currently
+being downloaded are kept in the "incomplete" directory. Completed
+downloads are moved to the "download" directory. 
+
+<p>
+
+You can specify the location of these directories on the command line,
+in the configuration file, or when nap prompts you for this
+information. If you do not specify a download directory, nap will use
+the current working directory. If you do not specify an incomplete
+directory, nap will use the download directory. If you do not specify
+an upload directory, nap will be unable to share any files. It is
+possible to specify more than one upload directories; multiple
+directories are separated by semicolons.
+
+<p>
+
+If an incomplete download results in a file of 100000 bytes or less,
+the file will be considered a "turd" and removed. Larger incomplete
+files will be kept in the "incomplete" directory. You can change this
+behavior; see <a href=#5.5.>5.5. Incompete downloads and turds</a>.
+
+<h4><a name=4.6.></a>4.6. Navigating the main screen</h4>
+
+The text of the main screen can be scrolled up and down by using the
+"PgUp" and "PgDn" keys. This allows you to see stuff that has
+disappeared off the top of the screen. If you prefer, you can use the
+alternative keybindings "Ctrl-P" and "Ctrl-N" or "Ctrl-V" for the same
+purpose.
+
+<p>
+
+To switch between screens, use the keys "F1" thru "F3", or "Alt-1"
+thru "Alt-3". In addition, the commands <code>/results</code> and
+<code>/dlul</code> will take you to the search results or the
+download/upload list from the main screen.
+
+<p>
+
+You can type <code>/help</code> to see a list of available
+commands. (There are so many that you will probably have to use "PgUp"
+and "PgDn" to see them all). You can get usage info for a particular
+command by typing <code>/help</code> followed by the command name
+(without the leading slash). 
+
+<p>
+
+When entering a command, a number of standard keybindings are
+available. "Ctrl-U" deletes the current line, while "Ctrl-K" truncates
+the input, and "Ctrl-W" deletes everything from the current word to
+the end of the line. "Ctrl-D" or "delete" deletes the current
+character. "Backspace" deletes the previous character and
+"Alt-backspace" deletes the previous word. You can use "Ctrl-A" or
+"home" to move to the beginning of the line, and "Ctrl-E" or "end" to
+move to the end of the current line. "Ctrl-L" refreshes the
+screen. 
+
+<p> 
+
+The "up" and "down" keys provide a history of previously typed
+commands scroll through a history list of previous commands. This can
+save you time when using the same commands repeatedly. You can also
+use the "tab" key for completing partially typed commands. For
+instance, <code>/res[tab]</code> will yield <code>/results</code>.
+
+<h4><a name=4.7.></a>4.7. Quitting nap</h4>
+
+To quit nap, type <code>/quit</code>. If there are any uploads or
+downloads going on, nap will refuse to quit unless you type
+<code>/quit yes</code>. You can also give the command
+<code>/tquit</code>, which will schedule the program to quit after all
+current transfers (including queued ones) have been completed. When
+<code>/tquit</code> is in effect, no new uploads will be accepted, but
+you can still initiate new downloads. You can undo the effect of
+<code>/tquit</code> with <code>/unquit</code>, in case you change
+your mind.
+
+<p>
+
+An emergency exit from nap is to press "Ctrl-C" twice in short
+succession. Note that a single "Ctrl-C" does not usually cause nap to
+quit.
+
+<h4><a name=4.8.></a>4.8. Napster vs. OpenNap</h4>
+
+Since June 2001, Napster Inc. has modified their servers to use a new
+client authentification scheme, and nap users can no longer connect to
+Napster Inc.'s servers. Thus, nap is configured to connect to the
+OpenNap servers by default. The OpenNap system is a network of napster
+servers that are independently owned (not run by Napster, the
+company). When starting up, nap will automatically download a list of
+servers from www.gotnap.com, and it will connect to the first
+available one. You can change this behavior if you want; see <a
+href=#7.3.>7.3. Meta-servers</a>.
+
+<h4><a name=4.9.></a>4.9. News about new releases</h4>
+
+At startup, nap will check online whether a newer release is
+available. If this is the case, it will inform you of the new release
+while starting up, as a gentle reminder to upgrade. If you never want
+to be informed of new releases in this way, put <code>nonews=1</code>
+in your config file or start nap with the option
+<code>-ononews</code>. You can also check for news from the main
+screen by typing <code>/news</code>.
+
+<h4><a name=4.10.></a>4.10. If you are behind a firewall</h4>
+
+Most firewalls allow only outgoing connections, not incoming ones. The
+napster protocol can compensate for this to a certain extent, by
+arranging things so that firewalled clients initiate connections to
+non-firewalled clients, and not the other way around. In this way,
+both uploads and downloads are possible between a firewalled and a
+non-firewalled client. However, between two clients that are both
+firewalled, neither uploads nor downloads are possible.
+
+<p>
+
+If you are behind a firewall, then nap needs to know about it, in
+order to be able to compensate for it. However, nap can't find this
+out on its own. The way to tell nap that you are behind a firewall is
+to set <code>dataport = 0</code> in your configuration file (see <a
+href=#7.>7. Configuration and user variables</a>).
+
+<p>
+
+If you are behind a firewall, you may also need to set up an http
+proxy so that nap can read its server list; see <a
+href=#7.4.>7.4. Http proxies</a>.
+
+<!---------------------------------------------------------------------->
+<h2><a name=5.></a>5. More on searching and downloading</h2>
+
+<h4><a name=5.1.></a>5.1. Advanced searches <font size=3 color=#00ff00><b>[updated 1.5.1]</b></font></h4>
+
+The <code>/search</code> command has several options. They are:
+<p><pre>
+        -m <i>n</i>            return at most <i>n</i> search results
+        -l              local search: do not search on linked servers
+        -p              toggle sending ping requests
+        -f              list full filenames (only if noresultscreen=1)
+
+        -b=<i>rate</i>, -b&lt;<i>rate</i>, -b&gt;<i>rate</i>   
+                        bitrate equal to, at most, or at least <i>rate</i>.
+
+        -c=<i>speed</i>, -c&lt;<i>speed</i>, -c&gt;<i>speed</i>   
+                        link speed equal to, at most, or at least <i>speed</i>.
+
+        -r=<i>freq</i>, -r&lt;<i>freq</i>, -r&gt;<i>freq</i>   
+                        sample rate equal to, at most, or at least <i>freq</i>.
+
+        -s=<i>size</i>, -s&lt;<i>size</i>, -s&gt;<i>size</i>   
+                        file size equal to, at most, or at least
+                        <i>size</i>, in bytes (opennap and slavanap only).
+
+        -d=<i>duration</i>, -s&lt;<i>duration</i>, -s&gt;<i>duration</i>   
+                        duration equal to, at most, or at least
+                        <i>duration</i>, in seconds (opennap and slavanap only).
+			<font size=3 color=#00ff00><b>[new 1.5.1]</b></font>
+
+	-x <i>keyword</i> exclude results that match keyword (opennap and 
+			slavanap only). Multiple -x options are possible.
+			<font size=3 color=#00ff00><b>[new 1.5.1]</b></font>
+
+        -t <i>filetype</i> search for the specified filetype, which must
+	                be one of: audio, video, text, image,
+	                application, mp3, any.
+			<font size=3 color=#00ff00><b>[new 1.5.1]</b></font>
+</pre>
+The "-s" option only works on OpenNap servers; it has no effect on Napster.
+
+<p>
+
+The "-l" option will cause the search to only be performed on the
+server you're connected to, and not on any other servers that might be
+linked to it in a network. 
+
+<p>
+
+The "-m" option limits the number of results returned. However, even
+if <i>n</i> is greater than 100, most servers will only return 100
+results.
+
+<h4><a name=5.2.></a>5.2. Pings</h4>
+
+Pings are test packages that are sent to other clients to see how "far
+away" they are in the internet. A ping result is the time, in
+milliseconds, that it took the package to travel to the other client
+and back. Normally, nap will try to collect ping results with each
+search request. You can switch off pinging by giving the "-p" option
+to the <code>/search</code> command, or by setting the user variable
+<code>noping</code> to 1. 
+
+<p>
+
+Nap implements pings via a separate helper application called
+"napping". The reason is that sending and receiving ping
+packets requires raw network protocol access, which usually requires
+root privileges on Linux. However, it would be dangerous to run nap
+with root privileges. The program "napping", written by
+Sebastian Zagrodzki, solves this problem. Napping is a very small
+program which is called by nap to handle pings. Napping, unlike nap,
+can be run "suid", i.e., with root privileges. This is safe because
+napping drops root privileges immediately after opening the network
+socket, which is in fact the first thing it does.
+
+<p>
+
+For napping to work, it must be installed somewhere in your $PATH, it
+must be owned by root, and it must have "suid" permissions. Thus, the
+permissions of napping should look like this:
+<pre>
+        -rwsr-xr-x    1 root     root        48417 Aug 29 17:54 napping*
+</pre>
+The "s" in the permissions is called the "suid" bit, and it means that
+napping will be run with the effective user id of root, rather than
+that of the user who actually runs it. You can set the right ownership
+and permissions with the following commands (assuming that napping is
+installed in /usr/local/bin):
+<pre>
+        chown root:root /usr/local/bin/napping
+	chmod 4755 /usr/local/bin/napping
+</pre>
+You can specify an alternative name for the napping program by setting
+the <code>napping</code> user variable. You can also use this to
+specify an absolute filename, which is useful in case napping is
+installed outside your $PATH (see <a href=#7.2.>7.2. User
+variables</a>).
+
+<h4><a name=5.3.></a>5.3. Advanced navigation of the search result screen</h4>
+
+By default, the result screen displays the bitrate and length of each
+song, as well as the connection speed and/or ping results. However,
+you have full control over what information is displayed: The
+following keys toggle each category of information on and off:
+<pre>
+        b - bitrate
+	l - length
+	m - megabytes
+	f - frequency
+	u - user name
+	s - speed
+	p - ping
+</pre>
+The "m" key also toggles between displaying the file size in megabytes
+and in bytes. Moreover, if you press "a", all categories of
+information will be turned on, and if you press "n", they will all be
+turned off (i.e., you will only see the filenames).
+
+<p>
+
+The search results can also be sorted by various different
+criteria. Pressing the uppercase equivalents of the above keys ("B",
+"L", etc) will sort the search results by that particular category
+(bitrate, length...). You can also press "N" (uppercase) to sort by
+filename, and "D" to sort by directory name. Sorting by directory name
+is useful if there are many files whose names start with "01", "02",
+and so on. If you press a sort key more than once, the items will
+alternately be sorted in ascending and descending order.
+
+
+<p>
+
+When you sort, the cursor will remain on the same item that it was
+on. Thus, if your cursor is on an item shared by a particular user,
+and you press "U", you will see other items of the same user
+nearby. Notice that after sorting, the search results are re-numbered
+starting from 1. Any subsequent <code>/get</code> commands must use
+the new numbering. 
+
+<p>
+
+If you prefer an appearance of the search result screen different from
+the default appearance, you can set the <code>sdefaults</code> user
+variable to a string of key strokes executed when that screen is
+initialized. The default is "blsp". You can set it, for instance, to
+"lspmm" if you don't want to see the bitrate, but instead the file
+size in bytes. You can also set it to something like "blspN" if you
+like your results sorted by name, rather than by connection
+speed. Note that ping results will only be displayed if they are
+actually available, and connection speeds will not be displayed for
+browse results.
+
+<h4><a name=5.4.></a>5.4. Shortcut searches</h4>
+
+A convenience features allows you to enter a new search directly from
+the search result screen or download/upload screen. Just type "space",
+and an input window will open in the status line with the prefix
+"/search " entered for you. You can also type '/' to take you back to
+the main screen and start a new command (a shortcut for 'q', '/').
+
+<h4><a name=5.5.></a>5.5. Incomplete downloads and turds</h4>
+
+Files that are currently downloading are kept in your "incomplete"
+directory. They also have the suffix ".incomplete" added to their
+filename (or alternatively the suffix defined by the user variable
+"incompletesuffix", if any). When a download has been successfully
+completed, the suffix is removed and the file is moved to your
+"download" directory.
+
+<p>
+
+Nap will, by default, delete any incomplete files whose size is 100000
+bytes or smaller. Nap considers such files "turds": they are too small
+to be of any value, and just tend to clutter up your hard drive. You
+can override the default cutoff of 100000 bytes by setting the user
+variable "turdsize" (see <a href=#7.2.>7.2. User variables</a>). In
+particular, if you set turdsize to 0, only empty files will be
+deleted, and if you set it to -1, no files will be deleted at all.
+
+<p>
+
+Note that the turdsize only applies to <i>incomplete</i> files.  Nap
+will never delete a completed file, even if the file size is very
+small.
+
+<p>
+
+Note that the convention on incomplete files makes it possible to
+choose the same directory as your download directory and your
+incomplete directory (incomplete files will still be recognizable
+because they have the suffix ".incomplete"). On the other hand, you
+may choose to include your download directory in your upload path.
+However, you should never include your incomplete directory in your
+upload path, as people will probably not be too happy about
+downloading your incomplete files.
+
+<p>
+
+If you try to download two files with identical names, nap will
+automatically rename one of the files before saving them.
+
+<h4><a name=5.6.></a>5.6. Upload and download limits and queueing</h4>
+
+If <code>maxuploads</code> is set, it defined a limit on the total
+number of simultaneous uploads. A per-user limit can be set in the
+variable <code>maxupuser</code>. 
+
+You can limit the maximal number of simultaneous uploads and
+downloads, both globally and for each remote user.  To limit the
+number of simultaneous uploads or downloads, set the user variables
+<code>maxuploads</code> and <code>maxdownloads</code> to the desired
+number. To limit the number of simultaneous uploads or downloads from
+each user, use the user variables <code>maxupuser</code> and
+<code>maxdownuser</code>. By default, there are no limits.
+
+<p>
+
+When the download limit is reached, nap will queue any additional
+downloads, and it will start them as soon as space is available.
+Queued downloads will be listed along with all other downloads on the
+download/upload screen. If you want to force a queued download to be
+started immediately, you can do so by pressing 'f' on the
+download/upload screen.
+
+<h4><a name=5.7.></a>5.7. Purging and retrying failed items</h4>
+
+By default, items which are stopped (finished, interrupted, timed out,
+or failed) are not automatically removed from the download list. They
+remain on the list until you remove them explicitly. Individual items
+can be removed from the download screen by pressing 'd'. You can also
+press 'P' to purge all stopped items in the current section (i.e., all
+uploads or all downloads). 
+
+<p>
+
+If you prefer stopped items to be automatically purged, you can set
+the user variable <code>autopurge</code> to 0. You can also set
+<code>autopurge</code> to a positive number, if you want items to be
+purged after this many seconds. The variables <code>autopurgeup</code>
+and <code>autopurgedown</code> allow you to set these parameters for
+uploads and downloads separately.
+
+<p>
+
+A download which has been interruped, or which has timed out or
+failed, can be retried by pressing 'r' on the item on the download
+screen. You can also retry all such items with a single keystroke by
+pressing 'R'.
+
+<h4><a name=5.8.></a>5.8. Limiting bandwidth</h4>
+
+It is possible to limit the bandwidth of up- and downloads. It is
+possible to set a limit on the bandwidth per connection, and to set an
+overall limit on the total bandwidth taken by all connections. This is
+done separately for uploads and downloads. Up- and download bandwidth
+limits are given in kilobytes per second, and they are set via the
+user variables <code>bandwidthup</code>, <code>bandwidthup1</code>,
+<code>bandwidthdown</code>, <code>bandwidthdown1</code>. See <a
+href=#7.2.>7.2. User variables</a>.
+
+<p>
+
+It is possible to change the bandwidth limits at any time. Such
+changes will immediately take effect, even for transfers that are
+already in progress. Note that bandwidth limits for downloads only
+affect the rate at which nap reads data, not the rate at which data
+arrives from the network. If data arrives on the network at a higher
+rate than nap reads it, then the operating system will usually buffer
+such data. Thus, the actual network bandwidth may not go down until
+the buffer is full.
+
+<p>
+
+If you plan to limit your upload bandwidth, please be sure to claim an
+appropriate connection speed. This is out of fairness to other
+users. For instance, if you limit your bandwidth to 10k/s, you should
+probably set your connection speed to 56k, even if you are really on a
+T3 connection. To some extent, nap will try to enforce this kind of
+etiquette.
+
+<h4><a name=5.9.></a>5.9. Direct browsing</h4>
+
+Nap supports direct browsing, also known as client-to-client browsing.
+This is implemented through a new command, <code>/browse2</code>,
+which works essentially the same way as <code>/browse</code>, except
+it gets the file list directly from the other client, rather than from
+the server.  Nap supports both outgoing direct browsing connections
+(you browsing another client's files) and incoming ones (another
+client browsing your files).
+
+<p>
+
+Direct browsing can be useful if the server limits the number of
+browse results that it returns. However, there are several caveats
+which limit the usefulness of direct browsing. The most important is
+that not many other clients support it. So you will be out of luck if
+you are trying to directly browse a client that does not support it -
+most likely, your browse request will time out after 30
+seconds. Nufsi, who implemented direct browsing support for nap,
+writes: "Of the Napster-branded clients, only BETA 8 and BETA 9
+support it, but even those clients don't support directly browsing a
+firewalled remote client.  I think the only other client I found that
+supports direct browsing is Lopster."
+
+<p>
+
+Another caveat is that if your direct browsing request leads to an error
+of some kind, there is no way to stop it, and you will not be able to
+perform another search until the direct browsing request times out after
+30 seconds. This is because, due to a bug in OpenNap, nap has no way
+of differentiating between an error due to a direct browsing request
+and any other kind of error. 
+
+<h4><a name=5.10.></a>5.10. Sharing non-music files</h4>
+
+By default, nap will only share files that it can validate as music
+files. Currently, this means files in the mp3 or Ogg Vorbis
+formats. Nap will generally refuse to share mp3 or ogg files that it
+recognizes as broken.
+
+<p>
+
+Since nap version 1.4.7, it is also possible to share non-music
+files. You have a certain amount of control over which types of files
+are shared through the <code>sharetypes</code> user variable. This
+variable contains a semicolon-separated list of case insensitive
+filename extensions, for example "jpg;jpeg;gif". The default is empty.
+Nap will share any files in your upload path which match one of these
+extensions. This is <i>in addition</i> to mp3 and ogg files, which nap
+will always share. Thus, there is no need to include "mp3" or "ogg"
+explicitly in the variable <code>sharetypes</code>. The extension "*"
+is special, as it matches all files.
+
+<p>
+
+Please note that whether a file is shared or not is decided at the
+time the library is built, not at the time the file is
+requested. Thus, any changes to <code>sharetypes</code> and
+<code>upload</code> do not take effect until you rebuild your
+library. You can use the <code>/update</code> or <code>/rebuild</code>
+commands to rebuild the library at any time. See also <a
+href=#7.5.>7.5. Building your library</a>.
+
+<h4><a name=5.11.></a>5.11. Managing uploads and downloads from the main screen</h4>
+
+Prior to nap version 1.5.0, the download/upload screen did not exist.
+Instead there were a number of commands for managing uploads and
+downloads directly from the main screen. It is no longer really
+necessary to use these commands, but they are still available so we
+summarize them here.
+
+<p>
+
+To see the download list on the main screen, type <code>/pdown</code>.
+To delete the third download from the list, type
+<p><pre>
+        /ddown 3
+</pre>
+The corresponding commands for uploads are <code>/pup</code> and
+<code>/dup</code>. The command <code>/retry</code> can be used to
+retry a specific failed download, and the command
+<code>/retryall</code> can be used to retry all of them. To force a
+queued or stopped download to be (re)started immediately, use
+<code>/force</code>.
+
+<p>
+
+Stopped downloads or uploads can be purged from the lists with the
+commands <code>/purgedown</code> and <code>/purgeup</code>, or use
+<code>/purge</code> to clean up both the download and upload lists
+with a single command.
+
+<p>
+
+You can also limit the output of the <code>/pdown</code> command to
+certain classes of downloads. Just type
+<pre>
+        /pdown [filter]
+</pre>
+where filter is any combinations of the letters "d", "q", "s",
+"f". These stand respectively for "downloading", "queued", "succeeded",
+and "failed". If a filter is given, then only the respective downloads will be
+displayed.
+
+<p>
+
+
+<!---------------------------------------------------------------------->
+<h2><a name=6.></a>6. Messages, channels, and hotlists</h2>
+
+One of the nice things about napster is that it allows you to
+communicate with other users. This is done through messages or
+channels.
+
+<h4><a name=6.1.></a>6.1. Private messages</h4>
+
+A "private" message is a message that you send to a specific user. You
+do this by typing
+<p><pre>
+        /msg <i>user</i> <i>msg</i>
+</pre>
+If you don't want to receive such messages from a particular user, you
+can ignore the user by typing
+<p><pre>
+        /ignore <i>user</i>
+</pre>
+You will no longer see that user's messages or files. If you have
+regrets later, you can also <code>/unignore</code> a user. To see a
+list of users you are currently ignoring, just type
+<code>/ignore</code> without any arguments. 
+
+<p>
+
+If you intend to carry on an extended conversation with another user,
+it quickly becomes annoying to type <code>/msg <i>user</i></code> all
+the time. You can tell nap which user you want to talk to by
+"querying" that user:
+<p><pre>
+        /query <i>user</i>
+</pre>
+Nap will now open a private channel to that user. The name of the user
+you are querying will be shown on the top blue status line, and also
+at the command prompt. You can now talk to the user just by typing
+messages and hitting return. Messages can be distinguished from
+commands because commands start with a "/". If you query more than one
+user, or you are querying a user while also on a channel, you can
+switch between users and channels by pressing "Ctrl-X". If you want to
+end the query with a user, just type
+<p><pre>
+        /part <i>user</i>
+</pre>
+You can also just type <code>/part</code> to end the current query.
+
+<p>
+
+If you're going to be away from your computer, and you are worried
+that other users might consider you rude for not replying to them, you
+can set the user variable "autoreply" to any string which will then be
+used as an automated reply. For instance, you can set it to "Hi, this
+is an automated reply. I'm away from my computer. Sorry for not
+responding personally." Nap will not autoreply a second time to a user
+it has just autoreplied to; this is to discourage infinite chats
+between two autoreplying clients!
+
+<h4><a name=6.2.></a>6.2. Napster channels</h4>
+
+When you join a channel, you can post messages to the channel and see
+what other users on the channel are saying. Type
+<p><pre>
+        /clist
+or      /clist2
+</pre>
+to see a list of available channels. <code>/clist</code> lists only
+the official channels, while <code>/clist2</code> also lists
+user-defined ones (see <a href=#6.3.>6.3. Creating your own channel</a>).  To
+join a channel, type 
+<p><pre>
+        /join <i>channel</i>
+</pre>
+Being on a channel is very similar to querying a user. You can be on
+several channels simultaneously. To switch between channels, press
+"Ctrl-X". The top blue status line shows the "topic" of the current
+channel. Press "Ctrl-T" to scroll the topic if it does not all fit on
+the screen. To leave a channel, type 
+<p><pre> 
+        /part <i>channel</i>
+</pre>
+You can omit the channel name if you want to leave the current channel.
+You can save the set of currently open channels to a file, or join all
+the channels previously saved in a file, by typing
+<p><pre>
+        /savechannels <i>[filename]</i>
+and     /loadchannels <i>[filename]</i>
+</pre>
+If you omit the filename, the default file
+<code>.nap/channels-<i>username</i></code> (relative to your home
+directory) will be used. Also, if the user variable
+<code>savechannels</code> is set to "1", nap will save your channels
+automatically when quitting and rejoin them when starting. See <a
+href=#7.2.>7.2. User variables</a>.
+
+<p>
+
+While you're on a channel, you will see a special prompt telling you
+what channel is currently active. To say something on that channel,
+simply type the message. This is why all command names start with a
+slash "/": so that when you're on a channel, nap can distinguish
+between a command and a post to a channel. 
+
+<p>
+
+A word of caution about double quotes ("). The napster protocol is
+extremely dumb when it comes to double quotes. It cannot tolerate any
+data which contains double quotes. Thus nap will replace double quotes
+by single quotes when you say something to a user or on a channel.
+
+<p>
+
+To see a list of all channels you are currently on, type
+<code>/pchans</code>. To see a list of users on your active channels,
+type <code>/names</code>. 
+
+<p>
+
+Just like for private messages, you can <code>/ignore</code> a user that is
+bothering you. More severe punishments are also available for users
+that behave truly inappropriately: you can request to kick a user from
+a channel or all channels, or request that a user be muzzled, killed,
+or banned. Such measures should of course be taken only under extreme
+circumstances, and might be subject to review by the administrators of
+your napster server. The corresponding commands are called
+<code>/kick</code>, <code>/kickall</code>, <code>/muzzle</code>,
+<code>/kill</code>, and <code>/ban</code>. Try 
+<p><pre>
+        /help <i>command</i>
+</pre> 
+for more info.
+
+<p>
+
+<h4><a name=6.3.></a>6.3. Creating your own channel</h4>
+
+You can easily create a new channel. Simply join a channel that does
+not already exist, and it will be created. Normally, such channels
+have names that start with "#", although the official Napster servers
+do not enforce this. Once you have created your channel, you are
+probably the only person on it, but you can invite others to join the
+channel as well. The channel will continue to exist as long as there
+are users on it; it will be deleted when the last user parts. You can
+see a list of all channels, including user-defined ones, by typing
+<code>/clist2</code>.
+
+<p>
+
+You can set or change the topic on a channel by typing
+<p><pre>
+        /topic <i>channel</i> <i>topic</i>
+</pre>
+However, this does not work on the official Napster servers. It works
+on OpenNap servers, if you are the user who created the channel.
+
+<h4><a name=6.4.></a>6.4. IRC channels</h4>
+
+Nap can also be used as an IRC client. I have not yet have time to
+find out how, so probably there will be more information here in a
+future version of this User Guide.
+
+<h4><a name=6.5.></a>6.5. The hotlist</h4>
+
+Napster allows you to specify a "hotlist" of users, and you will be
+notified whenever these users log on or off napster. In nap, simply
+type
+<p><pre>
+        /notify <i>user</i>
+and     /unnotify <i>user</i>
+</pre>
+to add a user to your hotlist, or respectively, to remove a user.  To
+see who is on your hotlist, and which of those users are currently on
+napster, just type <code>/notify</code> without argument.
+<code>/hotlist</code> and <code>/unhotlist</code> are alternative
+names for <code>/notify</code> and <code>/unnotify</code>.
+
+<p>
+
+Hotlists in nap are permanent; each time you make a change to your
+hotlist, it is automatically saved to a file (usually
+<code>~/.nap/hotlist-<i>username</i></code>).  The hotlist is
+automatically loaded when nap starts.
+
+<!---------------------------------------------------------------------->
+<h2><a name=7.></a>7. Configuration and user variables</h2>
+
+<h4><a name=7.1.></a>7.1. The configuration files</h4>
+
+Nap uses a configuration file, by default <code>~/.nap/napconf</code>,
+to store information about your default settings. If the configuration
+file does not already exist, nap will prompt you for the relevant
+information and create a new configuration file. It is possible to
+edit this file if you want to change your default settings. The format
+of the configuration file looks something like this (except that the
+actual file is rather longer):
+
+<p>
+
+<table><tr><td bgcolor=#c0c0c0>
+<pre>
+# nap config file. Note: for boolean options, 1=true, 0=false
+
+# your napster username
+user=yourname
+
+# your napster password - optional
+pass=yourpasswd
+
+# your napster email address
+email=anon@napster.com
+
+# list of upload directories, separated by semicolon
+upload=/home/yourname/music
+
+# your download directory
+download=/home/yourname/download
+
+# your directory for incomplete files
+incomplete=/home/yourname/incomplete
+
+# your connection speed, according to the following chart:
+#
+# Connection | Number
+# -------------------
+# Unknown    |  0
+# 14.4       |  1
+# 28.8       |  2
+# 33.6       |  3
+# 56.7       |  4
+# 64K ISDN   |  5
+# 128K ISDN  |  6
+# Cable      |  7
+# DSL        |  8
+# T1         |  9
+# T3 or >    | 10
+connection=4
+
+# maximal number of simultaneous uploads allowed
+#maxuploads=
+
+# maximum number of simultaneous uploads per user
+#maxupuser=
+
+# maximum number of simultaneous downloads allowed
+#maxdownloads=
+
+# maximum number of simultaneous downloads per user
+#maxdownuser=
+
+# list of servers, separated by semicolon (note: this is now ignored
+# and overwritten unless nometa is set)
+#servers=
+
+# port or range of ports to use for client-client connections
+dataport=6699-6799
+
+# log file for transfer logs
+#logfile=
+
+# log file for logging everything
+#logallfile=
+</pre>
+</td></tr></table>
+
+<p>
+
+This is the file which nap will create automatically for you, except
+it will use the settings that you enter.  Note that the password entry
+is left blank or set to a question mark. If you want, you can edit
+your configuration file and put your password in it; in this case, nap
+will not prompt you for it in the future. But nap will never save your
+password for you; whenever you save your config file, your password
+will show up as a question mark.
+
+<p>
+
+If you tend to use several different accounts on napster, and you
+don't want to be prompted for passwords, you can now also specify
+passwords and email addresses for each different account. Simply add
+some lines such as
+<p><pre>
+        pass.<i>username1</i>=<i>passwd1</i>
+        pass.<i>username2</i>=<i>passwd2</i>
+        email.<i>username1</i>=<i>email1</i>
+        email.<i>username2</i>=<i>email2</i>
+</pre>
+to your config file. If you specify passwords in this way, it is
+understood that you don't want to be prompted for them; thus, such
+passwords never get be replaced by "?".
+
+<p>
+
+Any options that are set in the configuration file can be overridden
+on the command line, by using the "-o" option. It is also possible to
+have more than one alternative configuration file (for instance, if
+you have two different napster accounts with different usernames and
+passwords), and to specify on the command line which one to use.
+
+<p>
+
+There is also the possibility to read a <i>global</i> configuration
+file, usually called <code>/etc/naprc</code>. This file, which follows
+the same format as the user configuration file discussed above, is
+only read if it exists, and it is read <i>after</i> the user's
+configuration file. However, any options previously set will not be
+overwritten, so in effect, the user's configuration file takes
+precedence over the global one. It is even possible to change the
+location of the global configuration file by defining the variable
+<code>globalconfigfile</code> in the user's configuration file.  
+
+<h4><a name=7.2.></a>7.2. User variables <font size=3 color=#00ff00><b>[updated 1.5.1]</b></font></h4>
+
+Nap has a general mechanism called "user variables". These are
+internal variables that correspond to nap's settings; for instance,
+anything you specify in your config file corresponds to such a
+setting.  You can type 
+<p><pre>
+        /set <i>variable</i> <i>value</i>
+and     /unset <i>variable</i>
+</pre>
+to set a variable to a value, or to unset a variable. If you just type
+<p><pre>
+        /set <i>variable</i>
+</pre>
+then the current value of this variable will be displayed. Finally, if
+you just type <code>/set</code>, a list of all currently set variables
+and their values will be displayed.
+
+<p>
+
+Here is an alphabetical list of most user variables that have a
+special meaning.
+
+<ul>
+
+<li><code><b>announcepongs</b></code>: If this variable is set to 1,
+nap will announce when it receives a PONG packet from the
+server. I am not sure why this feature is useful, but it once used to
+be the default behavior, so I kept this in case someone needs it.
+
+<li><code><b>autopurge</b></code>: If this variable is set to a
+number, stopped item (i.e., failed, finished, incomplete, timed out)
+will be automatically deleted from the download list after this many
+seconds. If not set or set to -1, stopped items will remain in the
+download items indefinitely, until you explicitly remove them.
+
+<li><code><b>autopurgedown</b></code>: Like <code>autopurge</code>,
+but for downloads only.
+
+<li><code><b>autopurgeup</b></code>: Like <code>autopurge</code>,
+but for uploads only.
+
+<li><code><b>autoreply</b></code>: If this variable is set, it
+represents a string which will be sent as an automatic reply to any
+user who sends you a private message. This might be handy if you are running
+nap non-interactively, and you don't want to appear rude by not
+replying.
+
+<li><code><b>autorestart</b></code>: If this variable is set to 1, we
+attempt to automatically reconnect to a server when the connection to
+the server is lost. Same as the command line option of the same name. 
+
+<li><code><b>bandwidthdown</b></code>: global limit on the bandwidth
+for downloads, in kB/s.
+
+<li><code><b>bandwidthdown1</b></code>: limit on the bandwidth of a
+single download, in kB/s.
+
+<li><code><b>bandwidthup</b></code>: global limit on the bandwidth
+for uploads, in kB/s.
+
+<li><code><b>bandwidthup1</b></code>: limit on the bandwidth of a
+single upload, in kB/s.
+
+<li><code><b>configfile</b></code>: Predictably, this is the name of
+your configuration file. I'm not sure why you would want to change it
+in the middle of a session, but you can.
+
+<li><code><b>connection</b></code>: Your connection speed. This is a
+number from 0 to 10. See the chart in the sample configuration file
+above. 
+
+<li><code><b>connecttimeout</b></code>: The number of seconds until
+nap times out while making a connection to any one server. The default
+is 5 seconds. When set to 0, there is no timeout at all (which can
+cause nap to hang indefinitely when trying to connect to a
+non-responsive server).
+
+<li><code><b>cursorfollowsscreen</b></code>: If set to 1, the behavior
+of the "PgUp" and "PgDn" keys on the search result screen will be
+"cursor follows screen", else "screen follows cursor". In case you care.
+
+<li><code><b>dataport</b></code>: The port on your local machine which
+remote clients will connect to. It is advisable to give a range or
+ports, for instance, 6699-6799, in case your chosen port is already
+taken by another program. You should set this to 0 if you are behind a
+firewall.
+
+<li><code><b>debug</b></code>: This is the same as the debug level set with
+the "-d" option, or with the command <code>/debug</code>.
+
+<li><code><b>download</b></code>: Your download directory, i.e., where
+you want complete downloaded files to go. Incomplete files will go to
+the incomplete directory.
+
+<li><code><b>email</b></code>: Your email address, as sent to the
+server. It is perfectly acceptable to leave this blank. You can also
+set email addresses for different usernames by defining variables of
+the form <code>email.<i>user</i></code>. 
+
+<li><code><b>globalconfigfile</b></code>: The name of a global
+configuration file (default <code>/etc/naprc</code>) which is read
+<i>after</i> the user's configuration file, but in a special mode
+where no values that are already set are overwritten. This file is
+only read on startup.
+
+<li><code><b>hash</b></code>: If set, calculate MD5 hashes of shared
+files. This used to be the default until 1.5.0. But since most servers
+don't use the hashes anyway, by default, we don't calculate hashes
+any more. <font size=3 color=#00ff00><b>[new 1.5.1]</b></font>
+
+<li><code><b>identity</b></code>: This value, if set, defines a fake
+client identification string. Normally the nap client identifies
+itself to the server with an identification string such as <nobr>"nap
+v1.5.2"</nobr>. Some dumb servers have been found to refuse
+connections from the nap client, and in such cases, you can set
+<code>identity</code> to a different value, e.g. <nobr>"WinMX
+1.0"</nobr>, to fool the server. <font size=3 color=#ff0000><b>[new
+1.5.2]</b></font>
+
+<li><code><b>incomplete</b></code>: Your incomplete directory, i.e.,
+where you want incomplete files to go. Completed downloads are moved
+to the download directory.
+
+<li><code><b>incompletesuffix</b></code>: The suffix added to the
+filenames of incomplete files. Default is ".incomplete".
+
+<li><code><b>libraryfile</b></code>: The location of your library
+file. The default is <code>~/.nap/shared</code> in your home
+directory.
+
+<li><code><b>logallfile</b></code>: If set, this is the name of a file
+to which everything that appears on the main screen will be logged.
+
+<li><code><b>logfile</b></code>: If set, this is the name of a file to
+which a record of all transfers (up- and downloads) will be logged.
+
+<li><code><b>maxdownloads</b></code>: limits the number of
+simultaneous downloads.
+
+<li><code><b>maxdownuser</b></code>: limits the number of
+simultaneous downloads for any one user.
+
+<li><code><b>maxuploads</b></code>: limits the number of
+simultaneous uploads.
+
+<li><code><b>maxupuser</b></code>: limits the number of
+simultaneous uploads for any one user.
+
+<li><code><b>metaserver</b></code>: the URL of a napigator-style
+metaserver to retrieve a server list from. The default is
+http://www.gotnap.com/servers.txt.
+
+<li><code><b>metatimeout</b></code>: If non-zero, this specifies the
+maximum number of seconds nap will spend trying to connect to the
+metaserver. The default is 5 seconds.
+
+<li><code><b>napping</b></code>: The name of the "napping" program to
+use. This can also be an absolute filename. The default is "napping"
+and is searched for in your $PATH. See also <a href=#5.2.>5.2. Pings</a>.
+
+<li><code><b>newstimeout</b></code>: If non-zero, this specifies the
+maximum number of seconds nap will spend looking for news about new
+releases while starting up. The default is 5 seconds.
+
+<li><code><b>noechosets</b></code>: If this is set to "1", then the
+<code>/set</code> command will not echo back its values to you.
+
+<li><code><b>nomasq</b></code>: Set this to "1" to disable filename
+masquerading. By default, nap hides the absolute pathnames of your
+upload directories from the server and other clients. For instance, if
+your upload directory is /home/username/music, and you are sharing a
+file /home/username/music/classical/Beethoven.mp3, then this will be
+reported to the server as /1/classical/Beethoven.mp3. Corresponding
+download requests will be converted to the original pathnames.
+<font size=3 color=#00ff00><b>[new 1.5.1]</b></font>
+
+<li><code><b>nometa</b></code>: If set to "1", prevents nap from
+contacting the meta-server on startup. This is useful if you would
+like to specify your own "servers" variable in your config file.
+
+<li><code><b>nonews</b></code>: If set to "1", nap will not attempt to
+look for news about new releases while starting up.
+
+<li><code><b>noresultscreen</b></code>: If this is set to "1", search
+results will be listed on the main screen, and not on a special search
+results screen. You can then download files with the <code>/get</code>
+or <code>/g</code> command.
+
+<li><code><b>noscroll</b></code>: If this is set to "1", then the main
+screen does not automatically scroll to the bottom on output.
+
+<li><code><b>pass</b></code>: your napster password. You can also set
+passwords for different users by defining variables of the form
+<code>email.<i>user</i></code>.
+
+<li><code><b>proxy</b></code>: if you are behind a firewall and need
+to use an http proxy to be able to access the world-wide web, then set
+<code>proxy</code> to the URL of your proxy server,
+e.g. <code>http://proxy.mydomain.com/</code>.
+
+<li><code><b>savechannels</b></code>: If set to "1" while quitting,
+nap will save your open channels to the file
+<code>~/.nap/channels-<i>username</i></code>. If set to "1" while
+starting, load and join channels from that file.
+
+<li><code><b>savepass</b></code>: If this is set to "1", nap considers
+it okay to store your password in your configuration file. By default,
+nap will only store a "?", which means you will be promted for the
+password next time you start nap.
+
+<li><code><b>scrollsize</b></code>: If set, this defines a limit on
+the number of lines that are saved on the main screen. The default is
+10000. If you set this to 0, there will be no limit.
+
+<li><code><b>sdefaults</b></code>: A string which determines the
+default layout of the search results screen. This is essentially a
+sequence of keystrokes which will be executed when the result screen
+is initialized, at the time the search results arrive. The default is
+"blsp". Use e.g. "ummU" to display only the user name, file size in
+bytes, and to sort by user names. Note: ping results and connection
+speeds are automatically turned off if that information is
+unavailable, so you may safely add them to your defaults.
+
+<li><code><b>servers</b></code>: A list of servers to connect to,
+separated by semicolons. This list is created automatically by
+connecting to www.gotnap.com (see the <code>metaserver</code> user
+variable). Thus, whatever you specify in your config file will be
+overwritten, unless you set <code>nometa</code> to 1.
+
+<li><code><b>sharetypes</b></code>: A semicolon-separated,
+case-insensitive list of filename extensions to share in addition to
+mp3 and Ogg Vorbis files. The extension "*" is special and matches any file.
+
+<li><code><b>showtoomanyuploads</b></code>: If this is set to "1",
+display a message each time a remote client requests an upload but our
+upload limit is reached. Otherwise, handle it silently.
+
+<li><code><b>turdsize</b></code>: The size of the largest file which
+nap will consider a turd. Incomplete files of this or smaller size
+will be deleted.
+
+<li><code><b>upload</b></code>: A list of your upload directories
+(directories that contain files that you want to share). These have to
+be separated by semicolons. 
+
+<li><code><b>user</b></code>: Your user name on napster.
+
+</ul>
+
+You can load or save the values of the user variables with the commands
+<p><pre>
+         /saveconfig <i>filename</i>
+and      /loadconfig <i>filename</i>
+</pre>
+The <i>filename</i> can be omitted, in which case your settings will
+be saved to your default configuration file (usually
+<code>~/.nap/napconf</code>).
+
+<h4><a name=7.3.></a>7.3. Meta-servers
+<font size=3 color=#ff0000><b>[updated 1.5.3]</b></font></h4>
+
+Normally, when starting up, nap downloads a list of available servers
+from a meta-server such as http://www.gotnap.com/servers.txt. This list
+will be stored in the "servers" user variable and can be used for
+later <code>/reconnect</code> commands.
+
+<p>
+
+If you want the server list to be refreshed while you are already
+logged into nap, use the <code>/getservers</code> command. This will
+reset the "servers" user variable to the current list of available
+servers. If you want to leave the server that you are currently on and
+connect to the next available server on the list, type
+<code>/reconnect</code>. To see which server you are currently
+connected to, type <code>/server</code>. To connect to a specific
+server, type
+<p><pre>
+        /server <i>IP:port</i>
+</pre>
+To see the current list of servers, type <code>/set servers</code>.
+
+<p>
+
+The URL to look for a server list can be customized by setting the
+"metaserver" user variable to the desired URL. Note that the format of
+the servers file must be that used by napigator. The timeout for the
+connection to the metaserver can be set with the "metatimeout"
+variable. The default is 5 seconds. If you would like to define your
+own "servers" variable in you config file and do not want it to be
+overwritten on startup, add "nometa=1" to your config file.
+
+<p>
+
+Also see the file <code>scripts/get-servers.sh</code> for a sample
+shell script which reads a server list from the web; this can be
+customized easily for custom web-based server lists. 
+
+<p>
+
+It is still possible to specify a particular server to connect to on
+the command line. Whenever you specify a "-s" option on the command
+line, nap will respect this and not get a server list from the
+metaserver. 
+
+
+<h4><a name=7.4.></a>7.4. Http proxies</h4>
+
+Nap uses the http protocol (the same protocol that is used by web
+browsers) to read the server list from www.gotnap.com, and to check for
+news about new releases.  If you are behind a firewall, you may need
+to use an http proxy to access the world-wide web. In this case, set
+the user variable <code>proxy</code> to the URL of your proxy server,
+for instance <code>http://proxy.mydomain.com/</code>. See <a
+href=#7.2.>7.2. User variables</a>.
+
+<h4><a name=7.5.></a>7.5. Building your library</h4>
+
+Nap maintains a list of the files that you sharing in the file
+<code>~/.nap/shared</code>. This file is called the "library". Normally,
+when you start nap, it will automatically detect whether the
+information in the library is up-to-date, and rebuild it if
+necessary. This may take a few moments, especially if you are sharing
+a lot of files.
+
+<p>
+
+You can force nap to rebuild your library by giving it the
+<code>--build</code> or <code>--build-only</code> options. Conversely,
+you can prevent it from building the library, even if it is out of
+date, by giving the <code>--nobuild</code>. This might be useful if
+you want to start two copies of nap simultaneously and you don't want
+them to interfere building the same library.
+
+<p>
+
+You can also issue the <code>/update</code> command from within nap,
+which will check if your library is up-to-date, and rebuild it if
+necessary. This is useful, for instance, if you have added new files
+to your upload directories while nap is already running. It is also
+possible to change your upload directories while nap is running,
+either by <code>/set upload</code> or by using the special
+<code>/chupload</code> command. But when you change your upload path,
+it is still necessary to rebuild your library for the changes to take
+effect. The <code>/rebuild</code> command works like
+<code>/update</code>, except it builds your library no matter whether
+it was up-to-date or not.
+
+<h4><a name=7.6.></a>7.6. "Some files in my upload directory don't
+show up on napster."</h4>
+
+There are two common reasons why some of your files may not show up on
+the server. The first reason is that some napster servers attempt to
+block copyrighted content. In doing so, they often end up blocking
+non-copyrighted content as well.
+
+<p>
+
+The other reason some files do not show up is that nap does a basic
+sanity check on your music files before it adds them to your shared
+library. Nap will refuse to share music files that it considers
+broken, because such files would only pollute the network. Please
+consider repairing such files before you share them. For example, <a
+href=http://hive.me.gu.edu.au/not_lame/>notlame</a> is a high quality
+free mp3 encoder which allows you, among other things, to reencode
+existing mp3 files. You just type something like 
+<p><pre>
+        notlame --mp3input <i>infile</i> <i>outfile</i>
+</pre>
+Needless to say that this process does not actually fix any
+<i>audible</i> problems with mp3 files.
+
+<p>
+
+If you want to share non-music files, see <a href=#5.10.>5.10. Sharing
+non-music files</a>.
+
+<!---------------------------------------------------------------------->
+<h2><a name=8.></a>8. Advanced features</h2>
+
+<h4><a name=8.1.></a>8.1. User defined commands and handlers</h4>
+
+One interesting feature of nap is the ability to add new user-defined
+commands. This is done via so-called aliases (also called macros). I
+mostly use aliases for defining shortcuts to commands that I use
+often. An alias definition is of the form
+<p><pre> 
+        /alias <i>name</i> <i>replacement</i>
+</pre>
+For instance, if you type
+<p><pre> 
+        /alias x get $1
+</pre>
+this will define "x" to be an alias, and you can henceforth type "/x
+arg" instead of "/get arg". In the replacement text, you can use
+variables such as "$1", "$2" etc to stand for the first, second
+argument and so on. You can also use "$1-" to stand for the first and
+all remaining arguments, "$2-" for the second and all remaining
+arguments, and so on. This is useful, for instance, in a alias like
+this:
+<p><pre>
+        /alias s search -b>128 -c>7 $1-
+</pre>
+The replacement text for an alias can contain several commands
+separated by "|", as in 
+<p><pre>
+        /alias f finger $1 | browse $1
+or      /alias i ignore user1 | ignore user2 | ignore user3
+</pre>
+Commands can also be grouped with braces "{" and "}". It is also
+possible, although maybe less useful, to construct more complex
+aliases, using control features such as "if" and "while".
+
+<p>
+
+To see a list of aliases currently defined, just type
+<code>/alias</code> without any arguments. To undefine an alias, use
+the <code>/unalias</code> command. Aliases can also be saved and
+loaded from a file with the <code>/savealias</code> and
+<code>/loadalias</code> commands. By default, alias are saved in and
+loaded from the file "~/.nap/aliases". This file is also automatically
+loaded every time your start nap.
+
+<p>
+
+There is also the ability to add user-defined "handlers". Handlers are
+similar to aliases, but they react to messages from the server, rather
+than to commands from the user. Handlers are automatically loaded from
+a file "~/.nap/handlers", and they can also be saved there. Warning:
+Handler code is not debugged very well and may cause program crashes.
+
+<p>
+
+The basic syntax for handlers is
+<p><pre>
+        /handler <i>code</i> <i>commands</i>
+</pre>
+where <code><i>code</i></code> is the napster message code in
+decimal. As with aliases, you can use "$1", "$3-5", "$2-" and so on to
+stand for selected parts of the incoming message. See <a
+href="napster.txt">napster.txt</a> for the napster protocol
+specification.
+
+<p>
+
+The details of the syntax and semantics of aliases and handlers is a
+bit obscure, and to my knowledge they have not been documented
+anywhere. This part of the code is definitely very buggy. If you ever
+have any serious use for them (other than defining a shortcut for a
+command), let me know.
+
+<h4><a name=8.2.></a>8.2. Daemon mode</h4>
+
+Sometimes you might want to share your files on napster, even when
+you're not currently actively using it. For instance, if you're on a
+multi-user system, you might want to run a napster client in the
+background at all times, even when you're not logged in. (Beware
+though that downloads generate quite a bit of network traffic, so you
+better had a fast connection and be sure it is not going to upset
+other users).
+
+<p>
+
+Nap's daemon mode allows you to do exactly that. If you invoke
+nap as follows:
+<p><pre>
+        nap --daemon --autorestart
+</pre>
+it will connect to the napster server and then run silently.  While
+connecting, it will still print the usual informational messages, and
+prompt you for any missing information. As soon as the connection
+succeeds, it will print something like
+<p><pre>
+        Connected to 208.184.216.40:8888
+</pre>
+and then fall silent. It will produce no further output, nor react to
+input. Moreover, if your config file is complete, and you are sure
+that nap will not prompt you for any information, you can even
+suppress the informational messages by redirecting its output:
+<p><pre>
+        nap --daemon --autorestart &gt; /dev/null
+</pre>
+
+<p>
+
+By the way, the <code>--autorestart</code> option is so that nap will
+automatically reconnect whenever it detects that it has been
+disconnected from the server. It tries to do this at most once a
+second, so that your computer will not overheat in case you get
+disconnected from the network. Using this method, I have been able to
+run nap unsupervised for days and even weeks at a time.
+
+<p>
+
+You can also get nap to reconnect by sending it a SIGUSR1 signal:
+<p><pre>
+        kill -USR1 <i>process-id</i>
+</pre>
+This works both in daemon mode and in interactive mode. When nap
+receives this signal, it executes the /reconnect command.
+
+<p>
+
+Two words of caution on using the <code>--autorestart</code> feature:
+nap may not always be able to detect when you have been disconnected
+from the server; thus autorestart may not always be triggered
+(although it has worked okay for me). Also, do not try to run two
+copies of nap with the same username and both with autorestart
+enabled; the napster network will allow at most one simultaneous
+session per username, and the two copies of nap will continue to kick
+each other out until the end of time.
+
+<p>
+
+If you feel uncomfortable with nap's silence, and you would rather
+like to see whether it is actually working (and not just dozing off),
+you have the ability to write something to a log file. The option
+<p><pre>
+        --log <i>logfile</i>
+</pre>
+will cause nap to log all uploads and downloads to the specified
+file. (But beware that log files might later be used against you
+in court).  If you'd like even more information, you can specify
+<p><pre>
+        --logall <i>logfile2</i>
+</pre>
+and nap will log everything that would have normally been written to
+the main screen to that file. Note that these log files can take up a
+tremendous amount of disk space, so you might want to delete them and
+restart nap periodically, for instance once a week. If a log file
+already exists, nap will append its output to the end of the existing file.
+
+<h4><a name=8.3.></a>8.3. Running nap as a nohup process</h4>
+
+On unix systems, it is possible to run a process as a "nohup" process
+- this means, the process will not be killed when you log out. This
+might come in handy if you want to run nap in the background while
+you're not logged in. Nap's daemon mode is perfect for a nohup process. 
+For instance, the following works:
+<p><pre>
+        nohup nap --daemon --autorestart --log logfile >/dev/null &
+</pre>
+Note that you have to put an explicit ampersand "&", or otherwise the
+process will not fork to the background. To stop such a process, you
+will have to kill it explicitly, by saying 
+<p><pre>
+        kill -KILL <i>pid</i>
+or      killall -KILL nap
+</pre>
+where <i>pid</i> is the process id, as reported by the command
+<code>ps -e</code>. The second form kills all processes whose name is
+nap.
+
+<!---------------------------------------------------------------------->
+<a name=commandline></a>
+<h2><a name=9.></a>9. Obsolete features</h2>
+
+<h4><a name=9.1.></a>9.1. Creating a new napster account</h4>
+
+This section is obsolete, since nap can no longer connect to the
+"official" Napster servers, and accounts do not need to be created on
+OpenNap servers. Thus, the "-m" option is now pretty much useless. 
+That said, here is a description of what it does:
+
+<p>
+
+If you do not have an account on napster yet, you can easily use nap
+to create a new account. Just type
+<p><pre>
+        nap -m -u <i>username</i>
+</pre>
+You will be prompted for your password and email address as usual, and
+possibly for some other information. Then your account will be
+created, and you immediately get logged into your new account. If the
+username is already taken, you will get an error message (or several)
+to that effect; you'll have to choose a different username until you
+find one that is not taken.
+
+<!---------------------------------------------------------------------->
+<a name=commandline></a>
+<h2><a name=10.></a>10. Summary of command line options</h2>
+
+<pre>
+<b>Usage:</b> <b>nap</b> <i>[options]</i>
+
+<b>Options:</b>
+-h, --help             - print this help message
+-v, --version          - print version info and exit
+-b, --build            - build library of shared files to send to server
+-B, --build-only       - build library and exit
+-N, --nobuild          - do not build library, even if it is out of date
+-m, --create           - create new account on server (obsolete)
+-r, --reconnect        - keep reconnecting until server connection established
+-a, --autorestart      - automatically reconnect when connection to server lost
+-q, --daemon           - run without user interface; file sharing only
+-t, --notitle          - do not display title bar (fixes messed-up displays)
+-l, --nxterm           - try using a terminal which is compatible with most
+                         systems (fixes some messed-up displays)
+-T, --transparent      - use terminal's default background instead of black
+-n, --noserver         - start up without connecting to a server <font size=3 color=#00ff00><b>[new 1.5.1]</b></font>
+-f, --config <i>fn</i>        - config file to use (default $HOME/.nap/napconf)
+-x, --log <i>fn</i>           - log all transfers to a specific filename
+-g, --logall <i>fn</i>        - log everything to a specific filename
+-s, --server <i>sv:port</i>   - select a specific server (multiple -s opts possible)
+-d, --debug <i>n</i>          - set debug level
+-u, --user <i>str</i>         - specify napster username
+-p, --pass <i>str</i>         - specify user's password
+-e, --email <i>str</i>        - specify user's email address
+-U, --upload <i>dir</i>       - specify upload directory (multiple -U opts possible)
+-D, --download <i>dir</i>     - specify download directory
+-I, --incomplete <i>dir</i>   - specify directory for incomplete files
+-P, --dataport <i>n-m</i>     - specify port(s) to use for incoming upload requests
+-C, --connection <i>n</i>     - specify connection speed number (see README)
+-M, --maxuploads <i>n</i>     - specify maximum number of simultaneous uploads
+-o, --option <i>var=value</i> - set user variable
+</pre>
+
+<!---------------------------------------------------------------------->
+<h2><a name=11.></a>11. Summary of nap commands</h2>
+
+I did not have time to write a detailed description of each command.
+Here is the complete list of commands, along with the short
+descriptions given by <code>/help</code>. Some command have additional
+options which are not documented.
+
+<p><pre>
+about              alias              aliaslist          announce
+ban                banlist            block              blocklist
+break              browse             browse2            cban
+cbanlist           chupload           clear              clearalias
+clearhandler       clist              clist2             cloak
+conf               cunban             ddown              dec
+debug              disconnect         dlul               dns
+done               dtimer             dup                echo
+eval               exec               fdown              finger
+force              fup                g                  get
+getservers         gusers             handler            handlerlist
+help               hotlist            if                 ignore
+ignoreclear        ignorelist         inc                irc
+join               kick               kickall            kill
+lastlog            loadalias          loadchannels       loadconfig
+loadhandler        me                 msg                muzzle
+names              news               noprint            notify
+opsay              part               pchans             pdown
+ping               psocks             pup                purge
+purgedown          purgeup            pvars              query
+q                  quit               rebuild            reconnect
+reload             repeat             results            retry
+retryall           savealias          savechannels       saveconfig
+savehandler        say                search             serv
+server             set                setdataport        setlevel
+setlinespeed       setpassword        setuserlevel       sraw
+stop               sver               tell               timer
+tlist              topic              tquit              unalias
+unban              unblock            unhandler          unignore
+unmuzzle           unnotify           unquit             unset
+update             while              whois              window
+wstats
+</pre>
+
+<p>
+
+<b>/about</b> - Shows credits<br>
+<b>/alias <i>[name]</i> <i>[args]</i></b> - Creates an alias, or lists current aliases<br>
+<b>/aliaslist</b> - Shows current list of aliases<br>
+<b>/announce <i>msg</i></b> - Broadcasts a message to all users<br>
+<b>/ban <i>[user/IP]</i></b> - Bans the specified user or IP, or lists banned users<br>
+<b>/banlist</b> - Prints a list of the current bans on the server<br>
+<b>/block <i>[IP]</i> <i>[reason]</i></b> - Blocks the specified IP, or lists blocked users<br>
+<b>/blocklist</b> - Gives a list of current blocked users<br>
+<b>/break</b> - Breaks out of a loop<br>
+<b>/browse <i>user</i></b> - Browses user's files<br>
+<b>/browse2 <i>user</i></b> - Directly browses user's files<br>
+<b>/cban <i>[user]</i> <i>[reason]</i></b> - Bans a user from a channel, or lists banned users<br>
+<b>/cbanlist</b> - Returns a list of banned users in a channel<br>
+<b>/chupload <i>path</i></b> - Changes your upload path (still need to /rebuild to update your files)<br>
+<b>/clear</b> - Clears your screen buffer<br>
+<b>/clearalias</b> - Clears all aliases<br>
+<b>/clearhandler</b> - Clears all handlers<br>
+<b>/clist</b> - Gets a list of channels<br>
+<b>/clist2</b> - Gets a list of channels (includes user created)<br>
+<b>/cloak</b> - Cloaks yourself<br>
+<b>/conf <i>config-string</i></b> - Request a change in server configuration variables<br>
+<b>/cunban <i>user</i> <i>[reason]</i></b> - Unbans a user from a channel<br>
+<b>/ddown <i>number or range</i></b> - Deletes downloads by number as returned from /pdown<br>
+<b>/dec</b> - Decreases the variable by one<br>
+<b>/debug <i>level</i></b> - Sets debug level<br>
+<b>/disconnect</b> - Disconnects you from the server<br>
+<b>/dlul</b> - Switches to the download/upload monitor screen<br>
+<b>/dns <i>host/IP</i></b> - Attempts to resolve the specified address<br>
+<b>/done</b> - Ends an alias<br>
+<b>/dtimer <i>[num]</i></b> - Delete the timed event with the given number<br>
+<b>/dup <i>number or range</i></b> - Deletes uploads by number as returned from /pup<br>
+<b>/echo <i>text</i></b> - Echos text to the screen<br>
+<b>/eval <i>name</i></b> - Returns the value of a variable<br>
+<b>/exec <i>[-o]</i> <i>command</i></b> - Executes a command from a shell and redirects the input to the client<br>
+<b>/fdown <i>number or range</i></b> - Gets information on the user as returned from /pdown<br>
+<b>/finger <i>user</i></b> - Gets information on the specified user<br>
+<b>/force <i>number or range</i></b> - Forces download of queued items, overriding download limit<br>
+<b>/fup <i>number or range</i></b> - Gets information on the user as returned from /pup<br>
+<b>/g <i>number or range</i></b> - Gets files by number as returned from /search<br>
+<b>/get <i>number or range</i></b> - Gets files by number as returned from /search<br>
+<b>/getservers</b> - Read server list from napigator-style metaserver<br>
+<b>/gusers</b> - Gets a global list of users<br>
+<b>/handler <i>[code]</i> <i>[args]</i></b> - Adds a handler, or lists current handlers<br>
+<b>/handlerlist</b> - Returns a list of handlers created<br>
+<b>/help <i>command</i></b> - Returns help on the specified command<br>
+<b>/hotlist <i>[user]</i></b> - Adds a user to your hotlist, or shows current hotlist<br>
+<b>/if (<i>val</i> <i>op</i> <i>val</i>) <i>cmd</i></b> - Compares two values<br>
+<b>/ignore <i>[user]</i></b> - Ignores a user, or lists all ignored users<br>
+<b>/ignoreclear</b> - Clears your ignore list<br>
+<b>/ignorelist</b> - Lists ignored users<br>
+<b>/inc <i>var</i></b> - Increases the variable by 1<br>
+<b>/irc</b> - No help available<br>
+<b>/join <i>[chan]</i></b> - Joins the specified channel, or lists all channels<br>
+<b>/kick <i>user</i> <i>[reason]</i></b> - Kicks a user from a channel<br>
+<b>/kickall <i>user</i> <i>[reason]</i></b> - Kicks a user from all channels you and the user are in<br>
+<b>/kill <i>user</i></b> - Kills the specified user<br>
+<b>/lastlog <i>str</i></b> - Returns all occurences of "str" that have been said or printed<br>
+<b>/loadalias <i>[filename]</i></b> - Loads a list of aliases from a file<br>
+<b>/loadchannels <i>[filename]</i></b> - Reads channels from a filename and joins them<br>
+<b>/loadconfig <i>[filename]</i></b> - Loads a list of settings from a filename<br>
+<b>/loadhandler <i>[filename]</i></b> - Loads a list of handlers from a filename<br>
+<b>/me <i>string</i></b> - Does an emotion<br>
+<b>/msg <i>user</i> <i>msg</i></b> - Sends the user the message specified<br>
+<b>/muzzle <i>user</i> <i>msg</i></b> - Muzzles the user with the specified message<br>
+<b>/names <i>channel</i></b> - Gets a list of channel users<br>
+<b>/news</b> - Checks for any news on the client<br>
+<b>/noprint</b> - Stops the client from echoing anything until the command returns<br>
+<b>/notify <i>[user]</i></b> - Adds a user to your hotlist, or shows current hotlist<br>
+<b>/opsay <i>msg</i></b> - Broadcasts a message to all moderators/admins/elite<br>
+<b>/part <i>[chan/user]</i></b> - Parts the specified or current channel or query<br>
+<b>/pchans</b> - Shows which channels you are on<br>
+<b>/pdown</b> [dqsf] - Gives a listing of your current downloads. Optional flags select downloading, queued, succeeded, failed items.<br>
+<b>/ping <i>user</i></b> - Pings a user<br>
+<b>/psocks</b> - Print the socket list (for debugging purposes)<br>
+<b>/pup</b> - Gives a listing of your current uploads<br>
+<b>/purge</b> - Removes all stopped items from upload and download lists<br>
+<b>/purgedown</b> - Removes all stopped items from download list<br>
+<b>/purgeup</b> - Removes all stopped items from upload list<br>
+<b>/pvars</b> - Prints the values of all variables currently set<br>
+<b>/query <i>user</i></b> - Queries a user<br>
+<b>/q</b> - Closes the program <br>
+<b>/quit</b> - Closes the program <br>
+<b>/rebuild</b> - Rebuilds your library unconditionally. See also /update<br>
+<b>/reconnect</b> - Reconnects you to the next available server on the list<br>
+<b>/reload<i>config-variable</i></b> - Resets server configuration parameter to its default value<br>
+<b>/reloadm</b> - Reloads the user command module (only if supported)<br>
+<b>/repeat <i>[min:sec] [cmd]</i></b> - Initiates a timed event which repeats every <min:sec> interval<br>
+<b>/results</b> - Switches to the search results screen<br>
+<b>/retry <i>number or range</i></b> - Puts stopped downloads back in the download queue<br>
+<b>/retryall</b> - Puts all stopped downloads back in the download queue<br>
+<b>/savealias <i>[filename]</i></b> - Saves current aliases<br>
+<b>/savechannels <i>[filename]</i></b> - Saves current channels to a filename<br>
+<b>/saveconfig <i>[filename]</i></b> - Saves current settings to a filename<br>
+<b>/savehandler <i>[filename]</i></b> - Saves current handlers to a filename<br>
+<b>/say <i>msg</i></b> - Sends msg to the current channel<br>
+<b>/search <i>[-b>bitrate] [-c>speed] [-r>freq] [-s>size] [-d>duration] [-x exclude]... [-t filetype] [-mmaxresults] [-l] [-p] [-f] query</i> - Searches the napster database<br>
+<b>/serv <i>[IP:port]</i></b> - Connects to the specificed server and port, or shows current server and port<br>
+<b>/server <i>[IP:port]</i></b> - Connects to the specificed server and port, or shows current server and port<br>
+<b>/set <i>[name]</i> <i>[value]</i></b> - Sets a user variable, or prints current values<br>
+<b>/setdataport <i>user</i> <i>port</i></b> - Sets a user's data port<br>
+<b>/setlevel <i>channel</i> <i>level</i></b> - ?<br>
+<b>/setlinespeed <i>user</i> <i>speed</i></b> - Changes a user's linespeed<br>
+<b>/setpassword <i>user</i> <i>password</i></b> - Sets a user's password<br>
+<b>/setuserlevel <i>user</i> <i>level</i></b> - Changes a user's userlevel<br>
+<b>/sraw <i>type</i> <i>string</i></b> - Send raw command to the server<br>
+<b>/stop</b> - Returns from the current command and stops all processing on it<br>
+<b>/sver</b> - Returns the server version<br>
+<b>/tell <i>user</i> <i>msg</i></b> - Sends the user the message specified<br>
+<b>/timer <i>min:sec</i> <i>cmd</i></b> - Initiates a timer to execute in the specified time<br>
+<b>/tlist</b> - Prints out a list of the current timers<br>
+<b>/topic <i>channel</i> <i>topic</i></b> - Changes a channel's topic<br>
+<b>/tquit</b> - Quits when all remaining transfers have completed. Can be canceled with /unquit<br>
+<b>/unalias <i>name</i></b> - Removes an alias<br>
+<b>/unban <i>IP</i></b> - Unbans the specified IP<br>
+<b>/unblock <i>IP</i></b> - Unblocks the specified IP<br>
+<b>/unhandler <i>code</i></b> - Removes a handler<br>
+<b>/unhotlist <i>user</i></b> - Removes a user from your hotlist<br>
+<b>/unignore <i>user</i></b> - Unignores a user<br>
+<b>/unmuzzle <i>user</i></b> - Unmuzzles the user<br>
+<b>/unnotify <i>user</i></b> - Removes a user from your hotlist<br>
+<b>/unquit</b> - Cancels the effect of /tquit<br>
+<b>/unset <i>name</i></b> - Unsets a variable<br>
+<b>/update</b> - Rebuilds your library if necessary. See also /rebuild<br>
+<b>/while (<i>val</i> <i>op</i> <i>val</i>) cmd</b> - Keeps executing cmd while the comparison is true<br>
+<b>/whois <i>user</i></b> - Gets information on the specified user<br>
+<b>/window</b> - Enables/disables window mode<br>
+<b>/wstats</b> - No help available<br>
+
+
+<!------------------------------------------------------------------------
+
+ The
+global download limit is useful if you are on a slow connection, and
+you want to download a number of files, but you'd rather download them
+one or two at a time (in order to end up with a few complete files,
+rather than a large number of incomplete ones). 
+The number of simultaneous downloads from each user can similarly be
+limited by setting the user variable <code>maxdownuser</code>. This is
+useful if you're on a fast connection, but you are downloading files
+from remote users who are potentially on a slow connection. By
+default, there is no limit.
+
+---------------------------------------------------------------------->
